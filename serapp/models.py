@@ -5,3 +5,6 @@ from django.db import models
 
 class emailv(models.Model):
     email = models.CharField(max_length=200)
+
+class room(models.Model):
+    pass

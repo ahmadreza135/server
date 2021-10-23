@@ -18,20 +18,18 @@ def signUp(request):
     req = request.POST
     # We Have Email, Password and UserName
     # TODO : Email verification
-    # if "first_req" in request.POST and "email" in request.POST:
-        # u = authenticate(email=request.POST["email"])
-        # if u is not None:
-        #     data = {"user_exist":"true"}
-        # else:
-        #     
-        #     r = verifmail.verify_email.first(request)
-        #     data = r
+    if "first_req" in request.POST and "email" in request.POST:
+        u = authenticate(email=request.POST["email"])
+        if u is not None:
+            data = {"user_exist":"true"}
+        else:
+            r = verifmail.verify_email.first(request)
+            data = r
 
-    if "verification_code" in request.POST and "email" in request.POST:
-        r = verifmail.verify_email.second(request)
-        data = r
-    elif "email" in request.POST and\
-    "password" in request.POST and "username" in request.POST:
+    elif "email" in request.POST and "newpassword" in request.POST and \
+    "password" in request.POST and "username" in request.POST\
+        and "verification_code" in request.POST:
+
         try:
             Email = req.get('email')
     
@@ -43,19 +41,8 @@ def signUp(request):
                 NowPassword = req.get('password')
                 u = authenticate(username=Email,password=NowPassword)
             elif u is None:
-                em = emailv.objects.get(email=Email)
-                if em is not None:
-                    u = User.objects.create_user(username=Email)
-                    u.set_password(NewPassword)
-                    u.last_name = "false"
-                    u.save()
-                    data = {"sign_uped":"true"}
-
-
-                else:
-                    data = {"email_verifyed":"false"}    
-
-               
+                r = verifmail.verify_email.second(request)
+                data = r   
             
             else:
                 data = {"sign_uped":"false"}
@@ -65,7 +52,7 @@ def signUp(request):
         except User.DoesNotExist:
             data = {"email_verifyed":"false"}
     else:
-        data = {"wrong_req":"true"}
+        data = {"wrong_requ":"true"}
 
 
     return JsonResponse(data)

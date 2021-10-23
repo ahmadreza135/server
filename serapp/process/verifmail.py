@@ -57,8 +57,7 @@ class verify_email:
                     verification_code.pop(requ_email)
 
                     vers = emailv.objects.get(email=requ_email)
-                    if vers is not None:
-    
+                    # emailv.objects.delete(email=requ_email)
                     return {"respons":"false"} # TODO : save this response to database
 
                 else:
