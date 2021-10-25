@@ -6,7 +6,8 @@ from django.db import models
 class emailv(models.Model):
     email = models.CharField(max_length=200)
 
-class room(models.Model):
-    name = models.CharField(max_length=32)
-    number_of_memebers = models.IntegerField()
-    
+class arz_roo_boors(models.Model):
+    name = models.CharField(max_length=200)
+    timeclosed = models.DateTimeField()
+    market_cap = models.IntegerField()
+    price = models.IntegerField()

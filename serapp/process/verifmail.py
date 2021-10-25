@@ -50,7 +50,7 @@ class verify_email:
                 return {"code_sent":"true"}
 
     def second(request):
-        if "verification_code" in request.POST and "email" in request.POST:
+        if "verification_code" in request.POST:
             requ_email = request.POST.get("email")
             try:
                 if str(verification_code[requ_email]) == request.POST.get("verification_code"):

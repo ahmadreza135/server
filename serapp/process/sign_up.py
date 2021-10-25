@@ -26,21 +26,24 @@ def signUp(request):
             r = verifmail.verify_email.first(request)
             data = r
 
-    elif "email" in request.POST and "newpassword" in request.POST and \
-    "password" in request.POST and "username" in request.POST\
-        and "verification_code" in request.POST:
+    elif "email" in request.POST and \
+    "password" in request.POST and "username" in request.POST:
 
         try:
             Email = req.get('email')
-    
             
             NewPassword = req.get('newpassword')
             
-            u = authenticate(username=Email)
-            if u is not None and u.has_usable_password():
+            try:
+                u = User.objects.get(username=Email)
+            except User.DoesNotExist:
+                u = None
+            if u is not None and u.has_usable_password() and "newpassword" in request.POST:
                 NowPassword = req.get('password')
                 u = authenticate(username=Email,password=NowPassword)
-            elif u is None:
+                u.set_password(NewPassword)
+                u.save()
+            elif u is None and "verification_code" in request.POST:
                 r = verifmail.verify_email.second(request)
                 data = r   
             
