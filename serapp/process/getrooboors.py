@@ -9,3 +9,5 @@ def get_last(request):
         g = g[len(g)-1]
         dat = {"name":g.name,"marketcap":g.market_cap,"price":g.price,"time":g.timeclosed}
         return JsonResponse(dat)
+
+    
