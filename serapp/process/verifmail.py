@@ -3,12 +3,14 @@ from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_protect ,csrf_exempt
 from django.contrib.auth.models import User
 import django,random
-
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from serapp.models import emailv
 
 
 
 verification_code = {}
+veri_codes = {}
 
 class verify_email:
     sender_address = 'rdaqasmy811@gmail.com'
@@ -18,21 +20,33 @@ class verify_email:
     global sender_email
     sender_email = sender_address
     password = sender_pass
-    context = ssl.create_default_context()
-    global server
-    server = smtplib.SMTP(smtp_server, port)
-    server.ehlo()  # Can be omitted
-    server.starttls(context=context)
-    server.ehlo()  # Can be omitted
-    server.login(sender_email, password)
 
+    context = ssl.create_default_context()
+    # with smtplib.SMTP(smtp_server, port) as server:
+    global server
+    # server = smtplib.SMTP(smtp_server, port)
+    # server.ehlo()  # Can be omitted
+    # server.starttls(context=context)
+    # server.ehlo()  # Can be omitted
+    # server.login(sender_email, password)
 
     def send_email(receiver_email, message):
-        server.sendmail(sender_email, receiver_email, message)
+        messages = MIMEMultipart()
+        messages['From'] = sender_email
+        messages['To'] = receiver_email
+        messages['Subject'] = 'This Is From softcoin' 
+        messages.attach(MIMEText(message, 'plain'))
+        text = messages.as_string()
+        try:
+            server.sendmail(sender_email, receiver_email,text)
+            return True
+        except smtplib.SMTPRecipientsRefused:
+            return False 
         global verif_codes
         global verification_code
 
     def first(request):
+        # print(request.user)
         if "first_req" in request.POST and "email" in request.POST:
             req_email = request.POST.get("email")
             try:
@@ -45,9 +59,13 @@ class verify_email:
             except django.contrib.auth.models.User.DoesNotExist: 
                 # TODO : send verification email to email
                 verification_code[req_email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
-                verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email]))
-                print(verification_code[req_email])
-                return {"code_sent":"true"}
+                if verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email])):
+                    print(verification_code[req_email])
+                    return {"code_sent":"true"}
+                else:
+                    return {"email_exist":"false"}    
+        else:
+            {"wrong_req":"true"}        
 
     def second(request):
         if "verification_code" in request.POST:
@@ -58,7 +76,8 @@ class verify_email:
 
                     vers = emailv.objects.get(email=requ_email)
                     # emailv.objects.delete(email=requ_email)
-                    return {"respons":"false"} # TODO : save this response to database
+                    if vers is not None:
+                        return {"respons":"false"} # TODO : save this response to database
 
                 else:
                     return {"res":"wrong code"}
@@ -74,3 +93,28 @@ class verify_email:
                 u.last_name = "false"
                 u.save()
                 return {"sign_uped":"true"}
+    def forget_password(request):
+        email = request.POST['email']
+        try:
+            if "veri_code" in request.POST:
+                code = request.POST['veri_code']
+                if code == str(veri_codes[email]):
+                    u = User.objects.get(username=email)
+                    generate_password = User.objects.make_random_password()
+                    u.set_password(generate_password)
+                    u.save()
+                    if verify_email.send_email(email,"This Is Your Generated Password For My Application\n" + generate_password):
+                        d = {"sent":"true"}
+                    else:
+                        d = {"sent":"false"}
+
+            else:            
+                veri_codes[email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
+                veri_code = veri_codes[email]
+                if verify_email.send_email(email,"This Is Your Verification Code For My Application\n" + str(veri_code)):
+                    d = {"sent":"true"}
+                else:
+                    d = {"sent":"false"}    
+        except User.DoesNotExist:
+            d = {"user_exist":"false"}
+        return d

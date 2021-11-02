@@ -1,4 +1,3 @@
-
 import random
 import smtplib
 import ssl
@@ -17,6 +16,8 @@ def signUp(request):
     data = {}
     print(request)
     req = request.POST
+
+    
     # We Have Email, Password and UserName
     # TODO : Email verification
     if "first_req" in request.POST and "email" in request.POST:
@@ -29,9 +30,11 @@ def signUp(request):
 
     elif "email" in request.POST and \
             "password" in request.POST and "username" in request.POST:
+        print(request.user.username)
 
         try:
             Email = req.get('email')
+            Email.index("@")
 
             NewPassword = req.get('newpassword')
 
@@ -42,8 +45,10 @@ def signUp(request):
             if u is not None and u.has_usable_password() and "newpassword" in request.POST:
                 NowPassword = req.get('password')
                 u = authenticate(username=Email, password=NowPassword)
-                u.set_password(NewPassword)
-                u.save()
+                if u is not None:
+                    u.set_password(NewPassword)
+                    u.save()
+                    data = {"sign_uped": "true"}
             elif u is None and "verification_code" in request.POST:
                 r = verifmail.verify_email.second(request)
                 data = r
@@ -55,7 +60,14 @@ def signUp(request):
             data = {"wrong_req": "true"}
         except User.DoesNotExist:
             data = {"email_verifyed": "false"}
+        except ValueError:
+            data = {"wrong_req": "true"}    
+
+    elif "forget_pass" in request.POST and "email" in request.POST:
+        r = verifmail.verify_email.forget_password(request)
+        data = r
     else:
         data = {"wrong_requ": "true"}
 
+    print (data)
     return JsonResponse(data)
