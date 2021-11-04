@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ["10.0.2.2","192.168.1.10","127.0.0.1","localhost"]
 
 INSTALLED_APPS = [
     'serapp.apps.SerappConfig',
+    'siteapp.apps.SiteappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
