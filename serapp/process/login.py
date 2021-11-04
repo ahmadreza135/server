@@ -5,6 +5,7 @@ from json.encoder import JSONEncoder
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 import django
+import json
 
 @csrf_exempt
 # @csrf_protect
@@ -15,6 +16,17 @@ def login_user(request):
     # u.set_password("iman")
     # u.save()
     # print(Password)
+    # print (data,request.POST)
+    # test_json = "{\"hello\":\"yes\"}"/
+    # test_json = json.dumps(test_json)
+    # print (test_json,type(test_json))
+    # return render(request, 'tx/texas.html', {'tx': test_json})
+    # return JsonResponse(data,encoder=JSONEncoder)
+    # r = render(request,"../templates/login.html",{'tx': "helllo"})
+    # print(request.META['HTTP_USER_AGENT'])
+    # # for i in range(len(data)):
+    # #     r.set_cookie(list(data.keys())[i],data[list(data.keys())[i]])
+    # return r
     data = {}
     try:
         # user = User.objects.get(username=Username,password=Password)
@@ -31,18 +43,17 @@ def login_user(request):
             user.last_name = "true"
             user.save()
             data = {"login_user":"true"}
-            r = render(request,"../templates/login.html",context=data)
-            return r
+            # js = {"ghas":"false"}
+            # js = json.dumps(js)
+            # r = render(request,"../templates/homepage.html",{'time_series_json_string': ""})
+    
+            
         else:
             # data = {"isnone":"yes"}  
             data = {"login_user":"false"}     
     except django.contrib.auth.models.User.DoesNotExist: 
         data = {"user_exists": "false"}
-    print (data,request.POST)
-    # return JsonResponse(data,encoder=JSONEncoder)
-    r = render(request,"../templates/login.html",context=data)
-    for i in range(len(data)):
-        r.set_cookie(list(data.keys())[i],data[list(data.keys())[i]])
-    return r
+ 
 
     # return data["loggedin"]
+    return JsonResponse(data)

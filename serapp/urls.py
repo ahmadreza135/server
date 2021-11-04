@@ -11,5 +11,6 @@ from . import views
 urlpatterns = [
     path('login/login/',login.login_user, name='verify'),
     path('login/signup/',sign_up.signUp,name = "signup"),
-    path('rooboors/get/', getrooboors.get_last, name = "get")
+    path('rooboors/get/', getrooboors.get_last, name = "get"),
+    path("", login.login_user,name="login")
 ]

@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 
 <html>
-    <div>
-        <form action="/login/login/" method="post">
-            <input type="text" name="username">
-            <input type="password" name="password">
-            <input type="submit">
-        </form>
-    </div> 
+    <head>
+        <title>login page</title>
+    </head>
+    <center>
+        <div>
+            <h1 id="h1">   
+             </h1>
+        </div>
+        <div>
+            <form action="/login/login/" method="post">
+                <input type="text" name="username" placeholder="Username"><br><br><br><br>
+                <input type="password" name="password" placeholder="Password"><br><br><br>
+                <input type="submit" value="login">
+            </form>
+        </div>
+    </center>
+    <body>
+        <p id='texas'></p>
+        <script>
+            function load_texas() {
+                return '{{ tx }}';
+            }
+            var json_data = load_texas();
+
+            var paragraph = document.getElementById('texas');
+            try {
+                paragraph.innerHTML = json_data;
+            }
+            catch(err) {
+                paragraph.innerHTML = err.message;
+            }
+        </script>
+    </body>
 </html>
