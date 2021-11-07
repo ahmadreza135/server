@@ -6,3 +6,5 @@ def index(request):
     template_name = "../templates/login.html"
     context = {}
     return render(request, template_name, context)
+
+

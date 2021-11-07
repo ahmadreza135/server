@@ -4,6 +4,7 @@
     <head>
         <title>login page</title>
     </head>
+
     <center>
         <div>
             <h1 id="h1">   
@@ -17,21 +18,4 @@
             </form>
         </div>
     </center>
-    <body>
-        <p id='texas'></p>
-        <script>
-            function load_texas() {
-                return '{{ tx }}';
-            }
-            var json_data = load_texas();
-
-            var paragraph = document.getElementById('texas');
-            try {
-                paragraph.innerHTML = json_data;
-            }
-            catch(err) {
-                paragraph.innerHTML = err.message;
-            }
-        </script>
-    </body>
 </html>

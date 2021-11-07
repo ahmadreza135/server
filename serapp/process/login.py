@@ -1,6 +1,6 @@
 from django.views.decorators.csrf import csrf_protect ,csrf_exempt
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponseRedirect
 from json.encoder import JSONEncoder
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -10,23 +10,10 @@ import json
 @csrf_exempt
 # @csrf_protect
 def login_user(request):
+
+    # return HttpResponseRedirect("/json/rooboors/get/")
     Password = request.POST.get('password')
     Username = request.POST.get("username")
-    # u = User.objects.get(username=Username)
-    # u.set_password("iman")
-    # u.save()
-    # print(Password)
-    # print (data,request.POST)
-    # test_json = "{\"hello\":\"yes\"}"/
-    # test_json = json.dumps(test_json)
-    # print (test_json,type(test_json))
-    # return render(request, 'tx/texas.html', {'tx': test_json})
-    # return JsonResponse(data,encoder=JSONEncoder)
-    # r = render(request,"../templates/login.html",{'tx': "helllo"})
-    # print(request.META['HTTP_USER_AGENT'])
-    # # for i in range(len(data)):
-    # #     r.set_cookie(list(data.keys())[i],data[list(data.keys())[i]])
-    # return r
     data = {}
     try:
         # user = User.objects.get(username=Username,password=Password)
@@ -43,17 +30,12 @@ def login_user(request):
             user.last_name = "true"
             user.save()
             data = {"login_user":"true"}
-            # js = {"ghas":"false"}
-            # js = json.dumps(js)
-            # r = render(request,"../templates/homepage.html",{'time_series_json_string': ""})
     
             
         else:
-            # data = {"isnone":"yes"}  
             data = {"login_user":"false"}     
     except django.contrib.auth.models.User.DoesNotExist: 
         data = {"user_exists": "false"}
  
 
-    # return data["loggedin"]
     return JsonResponse(data)
