@@ -1,9 +1,11 @@
 from django.views.decorators.csrf import csrf_protect ,csrf_exempt
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login_user
 from django.http import JsonResponse,HttpResponseRedirect
 from json.encoder import JSONEncoder
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
+
 import django
 import json
 
@@ -29,6 +31,10 @@ def login(request):
             user.save()
             data = {"login_user":"true"}
             # TODO : set context
+            # print(request.user)
+            login_user(request,user)
+            # logout(request)
+            # print(request.user.is_authenticated)
             return render(request,"../templates/dashboard.html",data)
     
             

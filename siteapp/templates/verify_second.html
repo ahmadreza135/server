@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<form action="/sign_up/verif_mail/" method="post">{% csrf_token %}
+    <input type="hidden" name="email" value="{{ email }}">
+    <input maxlength="6" type="number" name="verification_code">
+    <input name="newpassword" type="password">
+    <input type="submit">
+</form>

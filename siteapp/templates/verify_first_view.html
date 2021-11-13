@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<body>
+    <form action="/sign_up/send_code/" method="post">{% csrf_token %}
+        <input type="email" name="email">
+        <input type="hidden" name="first_req" value="true">
+        <input type="submit">
+    </form>
+</body>

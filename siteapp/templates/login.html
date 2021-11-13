@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 
-<html>
+<body>
     <head>
         <title>login page</title>
     </head>
 
     <center>
         <div>
-            <h1 id="h1">   
+            <h1 id="h1"> 
              </h1>
         </div>
-        <div>
-            <form action="/login/login/" method="post">{% csrf_token %}
-                <input type="text" name="username" placeholder="Username"><br><br><br><br>
-                <input type="password" name="password" placeholder="Password"><br><br><br>
-                <input type="submit" value="login">
-            </form>
+        <div class="ghab">
+            <div>
+                <form action="/login/login/" method="post">{% csrf_token %}
+                    <input class="username" type="text" name="username" placeholder="Username"><br><br><br><br>
+                    <input class="username" type="password" name="password" placeholder="Password"><br><br><br>
+                    <input type="submit" value="login" class="submit">
+                    <style>
+                        .username {
+                            width: 400px;
+                            height: 33px;
+                            margin-top: 60px;
+                            font-size: 20px;
+                            background:rgb(238, 205, 175);
+                        }
+
+                        .submit {
+                            width: 100px;
+                            height: 50px;
+                            background:rgb(17, 221, 17);
+                        }
+                    </style>
+                </form>
+            </div>    
         </div>
+        <style>
+            .ghab {
+                width: 500;
+                height: 500px;
+                background:rgb(69, 187, 207);
+            }
+        </style>
     </center>
-</html>
+</body>
