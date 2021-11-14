@@ -1,5 +1,5 @@
 from django.views.decorators.csrf import csrf_protect ,csrf_exempt
-from django.contrib.auth.models import User
+from siteapp.models import dashboard as User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_user
 from django.http import JsonResponse,HttpResponseRedirect

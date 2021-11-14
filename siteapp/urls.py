@@ -11,9 +11,10 @@ from . import views
 
 urlpatterns = [
     path("",page,name = "nemdanom"),
+    path("dashboard/",login,name = "nedmdanoxm"),
     path("login/",login,name = "nedmdanoxm"),
     path("login/login/",login_user,name = "nedmdanosxm"),
-    path("sign_up/view/",view_first,name = "nedmdanosxm"),
+    path("sign_up/",view_first,name = "nedmdanosxm"),
     path("sign_up/send_code/",verify_email.first,name = "nedmdanosxm"),
     path("sign_up/verif_mail/",verify_email.second,name = "nedmdanosxm"),
     path("sign_up/sign/",signUp,name = "nedmdanosxm")

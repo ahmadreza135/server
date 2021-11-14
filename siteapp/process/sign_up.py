@@ -2,9 +2,13 @@ from django.contrib.auth import authenticate, logout
 from django.db import models
 from serapp.models import emailv
 import serapp.process.verifmail as verifmail
+from django.shortcuts import render
+
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.contrib.auth.models import User
+from siteapp.models import dashboard as User
+
+
 
 
 @csrf_exempt

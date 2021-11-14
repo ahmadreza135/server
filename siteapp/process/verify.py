@@ -2,7 +2,7 @@ import smtplib,ssl
 from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_protect ,csrf_exempt
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from siteapp.models import dashboard as User
 import django,random
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -73,15 +73,16 @@ class verify_email:
                     return {"email_exist":"false"}    
         else:
             {"wrong_req":"true"}        
-
     def second(request):
         if "verification_code" in request.POST:
             requ_email = request.POST.get("email")
             try:
                 if str(verification_code[requ_email]) == request.POST.get("verification_code"):
                     verification_code.pop(requ_email)
+                    
 
                     vers = emailv.objects.get(email=requ_email)
+                    print("yes")
                     # emailv.objects.delete(email=requ_email)
                     if vers is not None:
                         return {"respons":"false"} # TODO : save this response to database
@@ -90,6 +91,7 @@ class verify_email:
                     return {"res":"wrong code"}
             except KeyError:
                 return {"verify_email_sent":"False"}
+                print("no")
             except emailv.DoesNotExist:
                 Email = request.POST['email']
                 NewPassword = request.POST['newpassword']
