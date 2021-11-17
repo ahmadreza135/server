@@ -1,4 +1,4 @@
 from django.contrib import admin
-from siteapp.models import dashboard
+# from siteapp.models import dashboard
 # Register your models here.
-admin.site.register(dashboard)
+# admin.site.register(dashboard)

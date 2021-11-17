@@ -6,12 +6,11 @@ from django.shortcuts import render
 
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from siteapp.models import dashboard as User
+# from siteapp.models import dashboard as User
 
 
 
 
-@csrf_exempt
 def signUp(request):
     data = {}
     print(request)

@@ -2,12 +2,12 @@ import smtplib,ssl
 from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_protect ,csrf_exempt
 from django.shortcuts import render
-from siteapp.models import dashboard as User
+# from siteapp.models import dashboard as User
 import django,random
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from serapp.models import emailv
-
+from django.shortcuts import redirect
 
 
 verification_code = {}
@@ -68,14 +68,16 @@ class verify_email:
                 verification_code[req_email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
                 if verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email])):
                     print(verification_code[req_email])
-                    return render(request,"../templates/verify_second.html",{"email":req_email})
+                    return render(request,"login_signup/verify_second.html",{"email":req_email})
                 else:
                     return {"email_exist":"false"}    
         else:
             {"wrong_req":"true"}        
     def second(request):
+        print(request.POST)
         if "verification_code" in request.POST:
             requ_email = request.POST.get("email")
+            print(verification_code)
             try:
                 if str(verification_code[requ_email]) == request.POST.get("verification_code"):
                     verification_code.pop(requ_email)
@@ -85,13 +87,14 @@ class verify_email:
                     print("yes")
                     # emailv.objects.delete(email=requ_email)
                     if vers is not None:
-                        return {"respons":"false"} # TODO : save this response to database
+                        return JsonResponse({"respons":"false"})# TODO : save this response to database
 
                 else:
-                    return {"res":"wrong code"}
+                    return JsonResponse({"res":"wrong code"})
             except KeyError:
-                return {"verify_email_sent":"False"}
                 print("no")
+                return JsonResponse({"verify_email_sent":"False"})
+                
             except emailv.DoesNotExist:
                 Email = request.POST['email']
                 NewPassword = request.POST['newpassword']
@@ -101,7 +104,8 @@ class verify_email:
                 u.set_password(NewPassword)
                 u.last_name = "false"
                 u.save()
-                return render(request,"../templates/dashboard.html",{})
+                from django.shortcuts import redirect
+                redirect("/dashboard/")
     def forget_password(request):
         email = request.POST['email']
         try:

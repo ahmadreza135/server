@@ -1,45 +1,144 @@
 <!DOCTYPE html>
-
-<body>
+<html lang="en">
     <head>
-        <title>login page</title>
+        <title>Softcoin Login</title>
+
+        <meta charset="UTF-8" />
+        <meta name="description" content="Lorem ipsum aliquip minim mollit sit velit proident elit duis aute irure tempor magna sint pariatur reprehenderit aliquip et voluptate consequat cillum tempor in culpa irure dolore ea aute laboris in elit tempor sed." />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     </head>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
 
-    <center>
-        <div>
-            <h1 id="h1"> 
-             </h1>
-        </div>
-        <div class="ghab">
-            <div>
-                <form action="/login/login/" method="post">{% csrf_token %}
-                    <input class="username" type="text" name="username" placeholder="Username"><br><br><br><br>
-                    <input class="username" type="password" name="password" placeholder="Password"><br><br><br>
-                    <input type="submit" value="login" class="submit">
-                    <style>
-                        .username {
-                            width: 400px;
-                            height: 33px;
-                            margin-top: 60px;
-                            font-size: 20px;
-                            background:rgb(238, 205, 175);
-                        }
+        html {
+            background: #a5e1f6;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-                        .submit {
-                            width: 100px;
-                            height: 50px;
-                            background:rgb(17, 221, 17);
-                        }
-                    </style>
+            padding-top: 2%;
+        }
+
+        .clearfix:after {
+          visibility: hidden;
+          display: block;
+          font-size: 0;
+          content: " ";
+          clear: both;
+          height: 0;
+        }
+        .login{
+            color: rgb(17, 170, 17);
+            text-decoration: none;
+            margin-right:10px;
+        }
+        .signup{
+            color :#2260be;
+            margin-left:10px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .form{
+            width: 500px;
+            height: 300px;
+            background-color: #6D7BF4;
+            margin-top: 2%;
+            border-radius: 20px;
+        }
+        .username{
+            width: 280px;
+            display: inline;
+            margin-top: 40px;
+            background-color: #ECECEC;
+            height: 26px;
+            font-size: 15px;
+        }
+        .password{
+            width: 280px;
+            display: block;
+            margin-top: 40px;
+            background-color: #ECECEC;
+            height: 26px;
+            font-size: 15px;
+
+        }
+        .submit{
+            margin-top: 45px;
+            height: 36px;
+            width: 200px;
+            font-size: 15px;
+            background-color: #36D61B;
+        }
+        .signbu{
+            float: left;
+            width: 160px;
+            margin-left: 30px;
+            margin-top: 35px;
+            text-decoration: none;
+        }
+        .forget{
+            float: right;
+            width: 160px;
+            text-decoration: none;
+            margin-right: 30px;
+            margin-top: 35px;
+        }
+        .name{
+            font-size: 40px;
+            display: inline;
+            text-decoration: none;
+            color: #000000;
+        }
+        h2{
+            margin: 0;
+            padding: 0;
+            margin-top: 120px;
+            font-size: 25px;
+        }
+    </style>
+    <body>
+<!--         <header id="main-header" class="clearfix">
+            <div class="container">
+                <h2>Ahmad Homepage</h2>
+                <nav>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/login/">Login</a></li>
+                        <li><a href="/sign_up/">Sign Up</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header> -->
+
+
+         
+
+        <center>
+            <a href="/" class="name">
+                Softcoin
+            </a>
+            <h2>
+                Login Form
+            </h2>
+            <div class="form">
+              <form action="/login/login/" method="post">{% csrf_token %}
+                    <input class="username" type="text" name="username" placeholder="Username">
+                    <input class="password" type="password" name="password" placeholder="Password">
+                    <input type="submit" value="Login" class="submit">
                 </form>
-            </div>    
-        </div>
-        <style>
-            .ghab {
-                width: 500;
-                height: 500px;
-                background:rgb(69, 187, 207);
-            }
-        </style>
-    </center>
-</body>
+                <a href="/sign_up/" class="signbu">
+                    i don't have an acount
+                </a> 
+                <a href="#" class="forget">
+                    i forget my password
+                </a>    
+            </div>
+        </center>
+
+
+    </body>
+
+</html>
+                  

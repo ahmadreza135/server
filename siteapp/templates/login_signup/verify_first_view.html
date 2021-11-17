@@ -1,8 +1,82 @@
 <!DOCTYPE html>
-<body>
-    <form action="/sign_up/send_code/" method="post">{% csrf_token %}
-        <input type="email" name="email">
-        <input type="hidden" name="first_req" value="true">
-        <input type="submit">
-    </form>
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Softcoin Email Verify</title>
+    </head>
+
+
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            background: #a5e1f6;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+            padding-top: 2%;
+        }
+
+        .clearfix:after {
+          visibility: hidden;
+          display: block;
+          font-size: 0;
+          content: " ";
+          clear: both;
+          height: 0;
+        }
+        .form{
+            width: 460px;
+            height: 200px;
+            background-color: #6D7BF4;
+            margin-top: 2%;
+            border-radius: 30px;
+        }
+        .email {
+            margin-top: 15%;
+            width: 70%;
+            height: 30px;
+            font-size: 18px;
+        }
+        .submit {
+            display: block;
+            margin-top: 30px;
+            width: 40%;
+            height: 40px;
+            border-radius: 25px;
+            background-color: #2BEE00;
+            color: #FFFFFF;
+            font-size: 16px;
+        }
+        center h2 {
+            margin: 0;
+            padding: 0;
+            margin-top: 180px;
+            font-size: 25px;
+        }
+        .name{
+            font-size: 40px;
+            display: inline;
+            text-decoration: none;
+            color: #000000;
+        }
+    </style>
+
+    <body>
+        
+        <center>
+            <a href="/" class="name">Softcoin</a>
+            <h2>Verify Email</h2>
+            <div class="form">
+                <form action="/sign_up/send_code/" method="post">{% csrf_token %}
+                    <input type="email" name="email" class="email" placeholder="type your email">
+                    <input type="hidden" name="first_req" value="true">
+                    <input type="submit" value="Send Code" class="submit">
+                </form>
+            </div>
+        </center>
+    </body>
+</html>

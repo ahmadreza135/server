@@ -1,5 +1,158 @@
 <!DOCTYPE html>
-<html>
-    <h1 id="id"></h1>
-    {{ rooboors }}
+<html lang="en">
+	<head>
+		<title>Siavash Homepage</title>
+
+		<meta charset="UTF-8" />
+		<meta name="description" content="Lorem ipsum aliquip minim mollit sit velit proident elit duis aute irure tempor magna sint pariatur reprehenderit aliquip et voluptate consequat cillum tempor in culpa irure dolore ea aute laboris in elit tempor sed." />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		
+		<style>
+			body, html {
+				padding: 0;
+				margin: 0;
+			}
+
+			html {
+				background: #ffffff;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+				padding-top: 50px;
+			}
+
+			a {
+				color: #222222;
+			}
+
+			#main-header {
+				background: #ffffff;
+				padding: 5px;
+				box-shadow: 0 4px 2px -2px rgba(0,0,0,.05);
+
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 100;
+			}
+
+			#main-header h2 {
+				font-size: 20px;
+				margin: 0;
+				margin-right: 20px;
+                margin-top: 5px;
+				float: left;
+				padding: 5px;
+			}
+
+			#main-header nav ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			#main-header nav ul li {
+				float: left;
+				margin-left: 20px;
+			}
+
+			#main-header nav ul li a {
+				padding: 10px;
+				display: block;
+				text-decoration: none;
+				border: 1px solid transparent;
+			}
+
+			#main-header nav ul li a:hover {
+				background: #f7f7f7;
+				border: 1px solid #e1e1e1;
+				border-radius: 5px;
+			}
+
+			.clearfix:after {
+			  visibility: hidden;
+			  display: block;
+			  font-size: 0;
+			  content: " ";
+			  clear: both;
+			  height: 0;
+			}
+            main center h1{
+                margin-top: 60px;
+                margin-bottom: 30px;
+            }
+            .login{
+                color: rgb(17, 170, 17);
+                text-decoration: none;
+                margin-right:10px;
+            }
+            .signup{
+                color :#2260be;
+                margin-left:10px;
+                margin-bottom: 30px;
+                text-decoration: none;
+            }
+            .cherts{
+                background-color: rgb(255, 255, 255);
+                width: 800px;
+                margin-top: 60px;
+            }
+            .cherts h3{
+                font-size: 23px;
+            }
+			.arzrooboors{
+				color: rgb(15, 18, 226);
+				width: 600px;
+				height: 200px;
+				background-color: rgb(52, 216, 101);
+			}
+		</style>
+
+	</head>
+	<body>
+		<header id="main-header" class="clearfix">
+			<div class="container">
+				<h2>Ahmad Homepage</h2>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/login/">Login</a></li>
+						<li><a href="/sign_up/">Sign Up</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+        <center>
+
+            <div class="arzrooboors">
+                <h1>
+                    {{ arz_name }}
+                    {{ arz_price }}
+                    {{ arz_cap }}
+                </h1>
+				<time>{{ arz_time_open }}<br>
+                    {{ arz_time_close }}</time>
+
+            </div>
+            <h2>
+                A Platform For Buy Together
+            </h2>
+            <h3>
+                <a class="login" href="/login/">Login To Your Acount </a> or  
+                <a class="signup" href="/sign_up/">Create New Acount</a>
+            </h3>
+
+            <div class="cherts">
+                <h3>
+                    Our Buy Strategy Is Good Strategy
+                </h3>
+            </div>
+        </center>
+
+
+
+
+	</body>
+
 </html>

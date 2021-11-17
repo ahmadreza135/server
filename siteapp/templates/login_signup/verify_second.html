@@ -1,7 +1,100 @@
 <!DOCTYPE html>
-<form action="/sign_up/verif_mail/" method="post">{% csrf_token %}
-    <input type="hidden" name="email" value="{{ email }}">
-    <input maxlength="6" type="number" name="verification_code">
-    <input name="newpassword" type="password">
-    <input type="submit">
-</form>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Softcoin SignUp</title>
+    </head>
+    <style type="text/css">
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            background-color: #ECECEC;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+            padding-top: 2%;
+        }
+
+        .clearfix:after {
+          visibility: hidden;
+          display: block;
+          font-size: 0;
+          content: " ";
+          clear: both;
+          height: 0;
+        }
+        .form{
+            width: 460px;
+            display: block;
+            height: 400px;
+            background-color: #5D5FEF;
+            border-radius: 30px;
+        }
+        .verify {
+            display: inline;
+            margin-top: 60px;
+            background-color: #ECECEC;
+            height: 30px;
+            font-size: 20px;
+        }
+        .password {
+            display: block;
+            margin-top: 60px;
+            background-color: #ECECEC;
+            height: 30px;
+            font-size: 20px;
+
+        }
+        .confirm {
+            display: block;
+            margin-top: 60px;
+            background-color: #ECECEC;
+            height: 30px;
+            font-size: 20px;
+        }
+        .submit {
+            display: block;
+            margin-top: 60px;
+            background-color: #17FF00;
+            height: 40px;
+            width: 200px;
+            font-size: 20px;
+        }
+        .chemdanom {
+            display: block;
+            padding: 0;
+            margin-top: 12%;
+            font-size: 20px;
+        }
+        .name {
+            display: inline;
+            padding: 0;
+            margin: 0;
+            margin-left: 20px;
+            font-size: 40px;
+        }
+    </style>
+    <body>
+        <h1 class="name">Softcoin</h1>
+        <center>
+            <h3 class="chemdanom">Sign Up With </h3>
+            <h2>{{ email }}</h2>
+            <div class="form">
+                <form action="/sign_up/verif_mail/" method="post">{% csrf_token %}
+                    <input class="verify" type="text" name="verification_code" placeholder="Email Verify Code">
+                    
+                    <input class="password" name="newpassword" type="password" placeholder="Password">
+
+                    <input type="hidden" name="email" value="{{ email }}">
+                    
+                    <input class="confirm" type="password" name="confirmpass" placeholder="Confirm Password">
+                    
+                    <input class="submit" type="submit" value="SignUp">
+                </form>
+            </div>
+        </center>  
+    </body>
+</html>
