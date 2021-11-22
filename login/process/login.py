@@ -10,14 +10,6 @@ from django.shortcuts import render
 import django
 import json
 
-# @csrf_exempt
-@csrf_protect
-def login_view(request):
-
-    # return HttpResponseRedirect("/json/rooboors/get/"
-
-    return render(request,"login_signup/login.html",{"top":"top"})
-# @csrf_exempt
 @csrf_protect
 def login(request):
     Password = request.POST.get('password')

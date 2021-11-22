@@ -6,13 +6,14 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
+
 # post = request.GET
 @csrf_protect
 def dashboard(request):
     data = {}
     if request.method == "GET":
-        try:  
-        	post = request.session['_old_post']
+        try:
+            post = request.session['_old_post']
         except KeyError:
              return redirect('/login/')
         
