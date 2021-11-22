@@ -8,6 +8,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from serapp.models import emailv
 from django.shortcuts import redirect
+from siteapp.models import dashboard
 
 
 verification_code = {}
@@ -52,27 +53,27 @@ class verify_email:
         global verification_code
 
     def first(request):
+        data = {}
         # print(request.user)
         if "first_req" in request.POST and "email" in request.POST:
             req_email = request.POST.get("email")
             try:
-                u = User.objects.get(username=req_email)
+                u = dashboard.objects.get(username=req_email)
                 if u is not None:
                     # u.delete()
-                    return {"email_exixt":"true"}
+                    data = {"email_exixt":"true"}
                 else:
-                    return{"isnone":"yes"}    
-            except django.contrib.auth.models.User.DoesNotExist: 
+                    data = {"isnone":"yes"}    
+            except dashboard.DoesNotExist: 
                 # TODO : send verification email to email
-                print('ok')
                 verification_code[req_email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
                 if verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email])):
                     print(verification_code[req_email])
                     return render(request,"login_signup/verify_second.html",{"email":req_email})
                 else:
-                    return {"email_exist":"false"}    
+                    data = {"email_exist":"false"}    
         else:
-            {"wrong_req":"true"}        
+            data = {"wrong_req":"true"}        
     def second(request):
         print(request.POST)
         if "verification_code" in request.POST:
@@ -84,7 +85,6 @@ class verify_email:
                     
 
                     vers = emailv.objects.get(email=requ_email)
-                    print("yes")
                     # emailv.objects.delete(email=requ_email)
                     if vers is not None:
                         return JsonResponse({"respons":"false"})# TODO : save this response to database
@@ -92,20 +92,23 @@ class verify_email:
                 else:
                     return JsonResponse({"res":"wrong code"})
             except KeyError:
-                print("no")
                 return JsonResponse({"verify_email_sent":"False"})
                 
             except emailv.DoesNotExist:
                 Email = request.POST['email']
                 NewPassword = request.POST['newpassword']
-                em = emailv(email=requ_email)
-                em.save()
-                u = User.objects.create_user(username=requ_email)
-                u.set_password(NewPassword)
-                u.last_name = "false"
-                u.save()
-                from django.shortcuts import redirect
-                redirect("/dashboard/")
+                cpass = request.POST["confirmpass"]
+                if cpass == NewPassword:
+                    em = emailv(email=requ_email)
+                    em.save()
+                    u = dashboard.objects.create_user(username=requ_email)
+                    u.set_password(NewPassword)
+                    u.last_name = "false"
+                    u.save()
+                    request.session['_old_post'] = request.POST
+                    return redirect("/dashboard")
+                else:
+                    return JsonResponse({"not_comp":"true"})
     def forget_password(request):
         email = request.POST['email']
         try:

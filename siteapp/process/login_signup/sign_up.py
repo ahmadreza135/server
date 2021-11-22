@@ -5,6 +5,7 @@ import serapp.process.verifmail as verifmail
 from django.shortcuts import render
 
 from django.http import HttpResponse, JsonResponse
+from siteapp.models import dashboard as User
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 # from siteapp.models import dashboard as User
 
@@ -13,7 +14,6 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 def signUp(request):
     data = {}
-    print(request)
     req = request.POST
 
     
@@ -29,7 +29,6 @@ def signUp(request):
 
     elif "email" in request.POST and \
             "password" in request.POST and "username" in request.POST:
-        print(request.user.username)
 
         try:
             Email = req.get('email')
@@ -68,6 +67,5 @@ def signUp(request):
         data = r
     else:
         data = {"wrong_requ": "true"}
-
-    print (data)
+        
     return JsonResponse(data)

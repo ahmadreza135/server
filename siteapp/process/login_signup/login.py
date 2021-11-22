@@ -36,14 +36,15 @@ def login(request):
             login_user(request,user)
             # logout(request)
             # print(request.user.is_authenticated)
-            return redirect("/dashboard?username=ahmadrezaqasemi1384@gmail.com&password=ahmad")
+            request.session['_old_post'] = request.POST
+            return redirect("/dashboard")
             # return render(request,"dashboard.html",data)
     
             
         else:
             data = {"login_user":"false"}
-            return render(request,"login_signup/login_faild.html",{})
+            return JsonResponse(data)
     except django.contrib.auth.models.User.DoesNotExist: 
         data = {"user_exists": "false"}
-        return render(request,"login_signup/login_faild.html",{})
+        return JsonResponse(data)
     

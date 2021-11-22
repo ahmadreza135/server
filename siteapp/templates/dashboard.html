@@ -2,14 +2,111 @@
 
 <html>
     <head>
+        <title>Dashboard</title>
         <meta charset="UTF-8" />
         <meta name="description" content="description" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     </head>
-    <style></style>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            background-color:rgb(239, 246, 255);
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding-top: 2%;
+        }
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+          }
+        .user_data {
+            width:10%;
+            height:100px;
+            display: inline-block;
+            background-color:rgb(0, 255, 255);
+            margin-left: 7%;
+        }
+        .label {
+            display: inline;
+        }
+        .cap{
+            width:10%;
+            display: inline-block;
+            margin-left: 7%;
+            font-size: 20px;
+        }
+        .user_data-text {
+            display: inline;
+        }
+        .paeen{
+            width:100%;
+            background-color:rgb(251, 140, 4);
+            position: absolute;
+            bottom: 20px;
+        }
+        .paiin {
+            float: bottom;
+        }
+        .column {
+            display: inline-block;
+        }
+        .copyright {
+            text-align: center;
+            position: absolute;
+            margin-left: 45%;
+            bottom: 0px;
+        }
+        .copyright p{
+            padding:0;
+            margin:0;
+        }
+    
+    </style>
     <body>
-        <h1>
-            
-        </h1>
+        <div class="user_data">
+            <p class="user_data-text">{{ user.sarafi }}</p>
+        </div>
+        <div class="user_data">
+            <p class="user_data-text">{{ user.verified_trades }}</p>
+        </div>
+        <div class="user_data">
+            <p class="user_data-text">{{ user.invited_peaple }}</p>
+        </div>
+        <div class="user_data">
+            <p class="user_data-text">{{ user.sum_of_trades }}</p>
+        </div>
+        <div class="user_data">
+            <p class="user_data-text">{{ user.ranking }}</p>
+        </div>
+        <div style="width: 100%;display:inline-block;"></div>
+        <h2 class="cap">sarafi</h2>
+        <h2 class="cap">verified_trades</h2>
+        <h2 class="cap">invited people</h2>
+        <h2 class="cap">sum_of_trades</h2>
+        <h2 class="cap">ranking</h2>
+        <div class="paeen">
+            <footer class="paiin">
+                <div class="column">
+                     
+    <p>Company</p>
+     
+                    <ul style="list-style-type:disc">
+                        <li><a href="/information/aboutus">About Us</a></li>
+                        <li><a href="/information/privacypolicy">Privacy Policy</a></li>
+                        <li><a href="/information/contactus">Contact Us</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+        <div class="copyright">
+            <p>&copy Created By ahmad 2021</p>
+        </div>
     </body>
 </html>
