@@ -9,10 +9,12 @@ from email.mime.text import MIMEText
 from serapp.models import emailv
 from django.shortcuts import redirect
 from siteapp.models import dashboard
+from django.shortcuts import render
 
 
 verification_code = {}
 veri_codes = {}
+special_codes = {}
 
 class verify_email:
     sender_address = 'rdaqasmy811@gmail.com'
@@ -110,27 +112,33 @@ class verify_email:
                 else:
                     return JsonResponse({"not_comp":"true"})
     def forget_password(request):
-        email = request.POST['email']
-        try:
-            if "veri_code" in request.POST:
-                code = request.POST['veri_code']
-                if code == str(veri_codes[email]):
-                    u = User.objects.get(username=email)
-                    generate_password = User.objects.make_random_password()
-                    u.set_password(generate_password)
-                    u.save()
-                    if verify_email.send_email(email,"This Is Your Generated Password For My Application\n" + generate_password):
-                        d = {"sent":"true"}
+        if request.method == "POST":
+            r = request.POST
+            email = r['email']
+            try:
+                if "veri_code" in r:
+                    code = request.POST['veri_code']
+                    if code == str(veri_codes[email]):
+                        special_codes[email] = str(random.randint(random.randint(1000000,1500000),random.randint(9000000,9900000))) + dashboard.objects.make_random_password()
+                        d = render(request,"set_pass.html",{"email":email,"special_code":special_codes[email]})
+                elif "email" in r and "special_code" in r and "password" in r and "confirmpass" in r:
+                    print(type(r["special_code"]),type(special_codes[email]))
+                    if r["special_code"] == special_codes[email] and r["password"] == r["confirmpass"]:
+                        us = dashboard.objects.get(username=email)
+                        us.set_password(r["password"])
+                        us.save()
+                        d = redirect("/login/")
+                else:            
+                    veri_codes[email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
+                    veri_code = veri_codes[email]
+                    print(veri_code)
+                    if verify_email.send_email(email,"This Is Your Verification Code For My Application\n" + str(veri_code)):
+                        d = render(request, "enter_ver_code.html", {"email":email})
+                        
                     else:
-                        d = {"sent":"false"}
-
-            else:            
-                veri_codes[email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
-                veri_code = veri_codes[email]
-                if verify_email.send_email(email,"This Is Your Verification Code For My Application\n" + str(veri_code)):
-                    d = {"sent":"true"}
-                else:
-                    d = {"sent":"false"}    
-        except User.DoesNotExist:
-            d = {"user_exist":"false"}
-        return d
+                        d = {"sent":"false"}    
+            except dashboard.DoesNotExist:
+                d = {"user_exist":"false"}
+            return d
+        elif request.method == "GET":
+            return render(request,"forget.html",{})
