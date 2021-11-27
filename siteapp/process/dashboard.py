@@ -1,6 +1,5 @@
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
-# from siteapp.models import dashboard as dashdash
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.contrib.auth.models import User
