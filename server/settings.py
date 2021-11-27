@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ["192.168.1.104","0.0.0.0","127.0.0.1","localhost","91.98.167.16
 # Application definition
 
 INSTALLED_APPS = [
+    'acount.apps.AcountConfig',
     'login.apps.LoginConfig',
     'sign_up.apps.SignUpConfig',
     'serapp.apps.SerappConfig',
