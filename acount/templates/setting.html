@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+        <meta charset="UTF-8">
+    </head>
     <style>
         #main-header {
             background: #ffffff;
@@ -63,29 +65,25 @@
         html {
             background: #ffffff;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            padding-top: 20px;
+            padding-top: 200px;
         }
         .side {
-            width: 300px;
-            height: 500px;
-            margin-left: 130px;
-            display: inline-block;
-            border: 2px solid rgb(0, 0, 0);
-        }
-        .side button {
-            display: inline-block;
-            cursor: pointer;
-            width: 100%;
-            height: 30px;
-            font-size: 16px;
-        }
-        .form_form {
-            margin-top: 90px;
             border: 1px solid rgb(39, 39, 39);
             height: 500px;
             display: inline-block;
             margin-left: 15%;
             width: 10%;
+        }
+        .form-form {
+            width: 700px;
+            height: 500px;
+            margin-left: 20%;
+            display: inline-block;
+            border: 2px solid rgb(0, 0, 0);
+        }
+        .sideb {
+            position: absolute;
+            cursor: pointer;
         }
 
     </style>
@@ -100,18 +98,20 @@
 				</nav>
 			</div>
 		</header>
-        <div class="full_form">
-            <div class="side">
-                <center>
-                    <button>Change Password</button>
-                    <button>Changeord</button>
-                </center>
-            </div>
-            <div class="form_form">
-                sdjf
-            </div>
-        </div>    
 
-
+        <div class="side">
+            <button class="sideb" onclick="myFunction()">Changeord</button>
+        </div>
+        <div class="form-form">
+            <p id="form-forma" class="sideb">
+            </p>
+        </div>
+        <script>
+            function myFunction () {
+                var t = document.getElementById("form-forma");
+                t.innerHTML = "hello";
+            }
+        
+        </script>
     </body>
 </html>
