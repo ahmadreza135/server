@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    {{ sucse }}
     <head>
         <meta charset="UTF-8">
     </head>
@@ -79,12 +80,73 @@
             height: 500px;
             margin-left: 20%;
             display: inline-block;
+            position: absolute;
             border: 2px solid rgb(0, 0, 0);
         }
         .sideb {
-            position: absolute;
+            margin:0;
+            padding:0;
             cursor: pointer;
+            display: ruby-text-container;
         }
+        .side button {
+            font-size:20px;
+            width: 100%;
+            height: 15%;
+        }
+        .oldpass {
+            display: block;
+            margin-top: 20px;
+            position: absolute;
+        }
+        .newpass {
+            display: block;
+            position: absolute;
+            margin-top: 40px;
+        }    
+        .confirmpass {
+            display: block;
+            margin-top: 60px;
+            position: absolute;
+        }
+        .submit {
+            display: block;
+            margin-top: 80px;
+            position: absolute;
+        }
+        .logout-submit {
+
+        }
+        .password {
+
+        }
+        .submit-del {
+
+        }
+        #main-header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #main-header nav ul li {
+            float: left;
+            margin-left: 20px;
+        }
+
+        #main-header nav ul li a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        #main-header nav ul li a:hover {
+            background: #f7f7f7;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+        }
+
 
     </style>
     <body>
@@ -93,23 +155,50 @@
 				<h2>Acount Settings</h2>
 				<nav>
 					<ul>
-						<li><a href="/">Home</a></li>
-					</ul>
+                        <li><a href="/">Home</a></li>
+                    </ul>
 				</nav>
 			</div>
 		</header>
 
         <div class="side">
-            <button class="sideb" onclick="myFunction()">Changeord</button>
+            <button class="sideb" onclick="changpass('chgpas')">Change Password</button><br>
+            <button class="sideb" onclick="changpass('delacount')">Delete Acount</button>
         </div>
-        <div class="form-form">
-            <p id="form-forma" class="sideb">
-            </p>
+        <div class="form-form" id="form-form">
+            <form class="sideb" id="as" action="/acount/changepass/" method="post">{% csrf_token %}
+            </form>
         </div>
+        <script src="/statics/jss/settingforms.js"></script> 
         <script>
-            function myFunction () {
-                var t = document.getElementById("form-forma");
-                t.innerHTML = "hello";
+            function changpass (name) {
+                var t = document.getElementById("as");
+                switch(name) {
+                    case 'chgpas':
+                        t.setAttribute("action","/acount/changepass/")
+                        if(t.innerHTML.length == 134){
+                            t.innerHTML += changepass;
+                        }else{
+                            t.remove()
+                            var y = document.getElementById("form-form");
+                            y.innerHTML = '<form class="sideb" id="as" action="/acount/changepass/" method="post">{% csrf_token %}</form>';
+                            var form = document.getElementById("as");
+                            form.innerHTML += changepass;
+                        }
+                        break;
+                    case 'delacount':
+                        t.setAttribute("action","/acount/delacount/")
+                        if(t.innerHTML.length == 134){
+                            t.innerHTML += delacount;
+                        }else{
+                            t.remove()
+                            var y = document.getElementById("form-form");
+                            y.innerHTML = '<form class="sideb" id="as" action="/acount/delacount/" method="post">{% csrf_token %}</form>';
+                            var form = document.getElementById("as");
+                            form.innerHTML += delacount;
+                        }
+                        break;              
+                }
             }
         
         </script>
