@@ -38,7 +38,7 @@
         <center>
             <a class="logo" href="/">Softcoin</a>
             <div class="form">
-                <form action="/sign_up/forgetpass/" method="post">{% csrf_token %}
+                <form action="/acount/forgetpass/" method="post">{% csrf_token %}
                     <input type="hidden" name="email" value="{{ email }}">
                     <input class="email-input" type="text" name="veri_code" placeholder="Enter verify Code">
                     <input class="submit" type="submit" value="Submit">

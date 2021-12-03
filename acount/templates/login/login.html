@@ -1,143 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <title>Softcoin Login</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Signin Template · Bootstrap v5.1</title>
 
-        <meta charset="UTF-8" />
-        <meta name="description" content="Lorem ipsum aliquip minim mollit sit velit proident elit duis aute irure tempor magna sint pariatur reprehenderit aliquip et voluptate consequat cillum tempor in culpa irure dolore ea aute laboris in elit tempor sed." />
-    </head>
-    <style>
-        body, html {
-            padding: 0;
-            margin: 0;
-        }
+  
 
-        html {
-            background: #a5e1f6;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    <!-- Bootstrap core CSS -->
 
-            padding-top: 2%;
-        }
+    <!-- Favicons -->
+<meta name="theme-color" content="#7952b3">
 
-        .clearfix:after {
-          visibility: hidden;
-          display: block;
-          font-size: 0;
-          content: " ";
-          clear: both;
-          height: 0;
-        }
-        .login{
-            color: rgb(17, 170, 17);
-            text-decoration: none;
-            margin-right:10px;
-        }
-        .signup{
-            color :#2260be;
-            margin-left:10px;
-            margin-bottom: 30px;
-            text-decoration: none;
-        }
+    
+    <!-- Custom styles for this template -->
+    <link href="/statics/csss/bootstrap.css" rel="stylesheet">
+    <link href="/statics/csss/login.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <form action="/acount/login/login/" method="post">{% csrf_token %}
+    <a href="/">
+        <img class="mb-4" src="/statics/images/icon.png" alt="" width="72" height="57">
+    </a>
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-        .form{
-            width: 500px;
-            height: 300px;
-            background-color: #6D7BF4;
-            margin-top: 2%;
-            border-radius: 20px;
-        }
-        .username{
-            width: 280px;
-            display: inline;
-            margin-top: 40px;
-            background-color: #ECECEC;
-            height: 26px;
-            font-size: 15px;
-        }
-        .password{
-            width: 280px;
-            display: block;
-            margin-top: 40px;
-            background-color: #ECECEC;
-            height: 26px;
-            font-size: 15px;
+    <div class="form-floating">
+      <input name="username" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
 
-        }
-        .submit{
-            margin-top: 45px;
-            height: 36px;
-            width: 200px;
-            font-size: 15px;
-            background-color: #36D61B;
-        }
-        .signbu{
-            float: left;
-            width: 160px;
-            margin-left: 30px;
-            margin-top: 35px;
-            text-decoration: none;
-        }
-        .forget{
-            float: right;
-            width: 160px;
-            text-decoration: none;
-            margin-right: 30px;
-            margin-top: 35px;
-        }
-        .name{
-            font-size: 40px;
-            display: inline;
-            text-decoration: none;
-            color: #000000;
-        }
-        h2{
-            margin: 0;
-            padding: 0;
-            margin-top: 120px;
-            font-size: 25px;
-        }
-    </style>
-    <body>
-<!--         <header id="main-header" class="clearfix">
-            <div class="container">
-                <h2>Ahmad Homepage</h2>
-                <nav>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/login/">Login</a></li>
-                        <li><a href="/sign_up/">Sign Up</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header> -->
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </form>
+</main>
 
 
-         
-
-        <center>
-            <a href="/" class="name">
-                Softcoin
-            </a>
-            <h2>
-                Login Form
-            </h2>
-            <div class="form">
-              <form action="/login/login/" method="post">{% csrf_token %}
-                    <input class="username" type="text" name="username" placeholder="Username">
-                    <input class="password" type="password" name="password" placeholder="Password">
-                    <input type="submit" value="Login" class="submit">
-                </form>
-                <a href="/sign_up/" class="signbu">
-                    i don't have an acount
-                </a> 
-                <a href="/sign_up/forgetpass/" class="forget">
-                    i forget my password
-                </a>    
-            </div>
-        </center>
-
-
-    </body>
-
+    
+  </body>
 </html>
-                  

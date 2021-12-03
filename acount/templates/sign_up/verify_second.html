@@ -83,7 +83,7 @@
             <h3 class="chemdanom">Sign Up With </h3>
             <h2>{{ email }}</h2>
             <div class="form">
-                <form action="/sign_up/verif_mail/" method="post">{% csrf_token %}
+                <form action="/acount/sign_up/verif_mail/" method="post">{% csrf_token %}
                     <input class="verify" type="text" name="verification_code" placeholder="Email Verify Code">
                     
                     <input class="password" name="newpassword" type="password" placeholder="Password">
