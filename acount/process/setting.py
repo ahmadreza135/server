@@ -26,7 +26,7 @@ def view(request):
         else:
             pass
     except KeyError:
-        pass
+        return redirect("/acount/login/")
 @csrf_protect
 def changepass(request):
     post = request.session['_old_post']
@@ -36,7 +36,7 @@ def changepass(request):
     us.set_password(password)
     us.save()
     request.session["sucse"] = "true"
-    return redirect("/acount/setting/")
+    return redirect("/acount/settings/")
 
 def logout_user(request):
     request.session["_old_post"].pop("username")

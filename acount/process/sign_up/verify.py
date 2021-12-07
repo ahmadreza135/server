@@ -120,20 +120,20 @@ class verify_email:
                     code = request.POST['veri_code']
                     if code == str(veri_codes[email]):
                         special_codes[email] = str(random.randint(random.randint(1000000,1500000),random.randint(9000000,9900000))) + dashboard.objects.make_random_password()
-                        d = render(request,"set_pass.html",{"email":email,"special_code":special_codes[email]})
+                        d = render(request,"sign_up/set_pass.html",{"email":email,"special_code":special_codes[email]})
                 elif "email" in r and "special_code" in r and "password" in r and "confirmpass" in r:
                     print(type(r["special_code"]),type(special_codes[email]))
                     if r["special_code"] == special_codes[email] and r["password"] == r["confirmpass"]:
                         us = dashboard.objects.get(username=email)
                         us.set_password(r["password"])
                         us.save()
-                        d = redirect("/login/")
+                        d = redirect("/acount/login/")
                 else:            
                     veri_codes[email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
                     veri_code = veri_codes[email]
                     print(veri_code)
                     if verify_email.send_email(email,"This Is Your Verification Code For My Application\n" + str(veri_code)):
-                        d = render(request, "enter_ver_code.html", {"email":email})
+                        d = render(request, "sign_up/enter_ver_code.html", {"email":email})
                         
                     else:
                         d = {"sent":"false"}    
@@ -141,4 +141,4 @@ class verify_email:
                 d = {"user_exist":"false"}
             return d
         elif request.method == "GET":
-            return render(request,"forget.html",{})
+            return render(request,"sign_up/forget.html",{})

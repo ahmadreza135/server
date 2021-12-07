@@ -1,8 +1,11 @@
 from django.urls import path,include,re_path
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 import re
 from PIL import Image
 
+
+@csrf_protect
 def imageview(request):
     url = request.get_full_path()
     path = "siteapp/statics/images/"+re.findall(r".+\/(.+)",url)[0]
@@ -14,6 +17,8 @@ def imageview(request):
         response = HttpResponse()
         response.write("hey")
         return response
+    
+@csrf_protect    
 def jsview(request):
     url = request.get_full_path()
     path = "siteapp/statics/jss/"+re.findall(r".+\/(.+)",url)[0]
@@ -24,6 +29,7 @@ def jsview(request):
         response = HttpResponse()
         response.write("hey")
         return response
+@csrf_protect    
 def cssview(request):
     url = request.get_full_path()
     path = "siteapp/statics/csss/"+re.findall(r".+\/(.+)",url)[0]

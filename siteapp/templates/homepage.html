@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- <link href="/statics/csss/bootstrap.min.css" rel="stylesheet"> -->
-		<!-- <link href="/statics/csss/bootstrap.css" rel="stylesheet"> -->
+		<link href="/statics/csss/bootstrap.min.css" rel="stylesheet">
+		<link href="/statics/csss/bootstrap.css" rel="stylesheet">
 
 
-		<title>Siavash Homepage</title>
+		<title>Ahmad Homepage</title>
+		
 
 		<meta charset="UTF-8" />
 		<meta name="description" content="Lorem ipsum aliquip minim mollit sit velit proident elit duis aute irure tempor magna sint pariatur reprehenderit aliquip et voluptate consequat cillum tempor in culpa irure dolore ea aute laboris in elit tempor sed." />
@@ -14,51 +15,60 @@
 
 	</head>
 	<body>
-		<header id="main-header" class="clearfix">
-			<div class="container">
-				<h2>Ahmad Homepage</h2>
-				<nav>
-					<ul id="ul">
-						<li><a href="/">Home</a></li>
-						<li><a href="/acount/login/">Login</a></li>
-						<li><a href="/acount/sign_up/">Sign Up</a></li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-        <center>
-		<div>
-			<div class="arz-form">
-			  <div class="arz-name col">
-				<p>Dogecoin</p>
+		<div class="container">
+			<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+			  <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+				<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+			  </a>
+		
+			  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+				<li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+			  </ul>
+		
+			  <div class="col-md-3 text-end">
+				<a href="/acount/login/" class="login-a btn btn-outline-primary me-2">Login</a>
+				<a href="/acount/sign_up/" class="btn btn-primary">Sign-up</a>
 			  </div>
-			  <div class="arz-price col">
-				<p class="p">1120000</p>
-			  </div>
-			  <div class="arz-cap col">
-				<p class="p">20M$</p>
-			  </div>
-			  <div class="arz-status">
-				<h2 style="font-weight: normal;">Status: arz-status</h2>
-				<p>our suggestion to you: buy</p>
-			  </div>
-			</div>
-			<br>
+			</header>
 		</div>
-            <h2>
-                A Platform For Buy Together
-            </h2>
-            <h3>
-                <a class="login" href="/acount/login/">Login To Your Acount </a> or  
-                <a class="signup" href="/acount/sign_up/">Create New Acount</a>
-            </h3>
+        <center>
+			<div class="container">
+				<div>
+					<div class="row arz-form">
+					<div class="arz-name col-12 col-sm-12">
+						<p>Dogecoin</p>
+					</div>
+					<div class="arz-price col-12 col-sm-6">
+						<p class="p">1120000</p>
+					</div>
+					<div class="arz-cap col-12 col-sm-6">
+						<p class="p">20M$</p>
+					</div>
+					<div class="arz-status col-12 col-sm-12">
+						<h2>Status: arz-status</h2>
+						<p>our suggestion to you: buy</p>
+					</div>
+					</div>
+					<br>
+				</div>
+				<div>
+					<div class="row">
+						<h2 class="col-12" style="margin-bottom: 16px;">
+							A Platform For Buy Together
+						</h2>
 
-            <div class="cherts">
-                <h3>
-                    Our Buy Strategy Is Good Strategy
-                </h3>
-            </div>
+						<div class="col-12 col-md-12 col-el-12" style="margin-top:30px;">
+							<h4>
+								Our Buy Strategy Is Good Strategy
+							</h4>
+						</div>
+					</div>
+				</div>
+			</div>
         </center>
 
 		<script>
@@ -67,18 +77,18 @@
 				t.innerHTML+= '<li><a href="/acount/dashboard/">Dashboard</a></li>';
 			}
 		</script>
-		<div class="paeen">
-			<div class="column">
-				<ul style="list-style-type:disc">
-					<li><a href="/information/aboutus">About Us</a></li>
-					<li><a href="/information/privacypolicy">Privacy Policy</a></li>
-					<li><a href="/information/contactus">Contact Us</a></li>
-				</ul>
-				<div class="copyright">
-					<p>&copy ahmad</p>
-				</div>
-			</div>
-        </div>
+		<div class="container">
+			<footer class="py-3 my-4">
+			  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+				<li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+				<li class="nav-item"><a href="/information/privacypolicy" class="nav-link px-2 text-muted">Privacy Policy</a></li>
+				<li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+				<li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+				<li class="nav-item"><a href="/information/aboutus" class="nav-link px-2 text-muted">About</a></li>
+			  </ul>
+			  <p class="text-center text-muted">© 2021 ahmad</p>
+			</footer>
+		</div>
 
 	</body>
 

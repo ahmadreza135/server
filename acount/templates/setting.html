@@ -11,6 +11,7 @@
     
     <!-- Bootstrap core CSS -->
     <link href="/statics/csss/bootstrap.min.css" rel="stylesheet">
+    <link href="/statics/csss/bootstrap.css" rel="stylesheet">
 
     <!-- Favicons -->
 
@@ -41,13 +42,13 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" style="font-size:15px;color: black;cursor:default;" aria-current="page">
+            <a class="nav-link active" style="font-size:15px;" aria-current="page" href="/acount/dashboard/">
               <span data-feather="home"></span>
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" style="font-size:15px;" aria-current="page" href="/acount/settings/">
+            <a class="nav-link active" style="font-size:15px;color:black;cursor:default;" aria-current="page">
               <span data-feather="home"></span>
               Settings
             </a>
@@ -58,16 +59,25 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2">Settings {{ sucse }}</h1>
         </div>
-        <div>
-
-
-
-
-        </main>
-        </div>
-    </div>
+        <div class="container">
+            <div class="row">
+                <div name="chgpas" class="col-12 col-sm-12">
+                    <div class="row">
+                        <h3 class="col-12 col-sm-4">Change Password</h3>
+                        <form class="col-12 col-sm-8 form-form" id="as" action="/acount/changepass/" method="post">{% csrf_token %}
+                            <input class='form-input' type='password' name='newpass' placeholder='New Password'>
+                            <input class='form-input' type='password' name='oldpass' placeholder='Password'>
+                            <input class='form-input' type='password' name='confirmpass' placeholder='Confirm Password'>
+                            <input class='submit' type='submit' value='Change Password'>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+      </div> 
+    </main>    
   </body>
 </html>
 
@@ -94,7 +104,147 @@
         <meta charset="UTF-8">
     </head>
     <style>
-       
+        #main-header {
+            background: #ffffff;
+            padding: 5px;
+            box-shadow: 0 4px 2px -2px rgba(0,0,0,.05);
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        #main-header h2 {
+            font-size: 20px;
+            margin: 0;
+            margin-right: 20px;
+            margin-top: 5px;
+            float: left;
+            padding: 5px;
+        }
+
+        #main-header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #main-header nav ul li {
+            float: left;
+            margin-left: 20px;
+        }
+
+        #main-header nav ul li a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        #main-header nav ul li a:hover {
+            background: #f7f7f7;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+        }
+
+        .clearfix:after {
+          visibility: hidden;
+          display: block;
+          font-size: 0;
+          content: " ";
+          clear: both;
+          height: 0;
+        }
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            background: #ffffff;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding-top: 200px;
+        }
+        .side {
+            border: 1px solid rgb(39, 39, 39);
+            height: 500px;
+            display: inline-block;
+            margin-left: 15%;
+            width: 10%;
+        }
+        .form-form {
+            width: 700px;
+            height: 500px;
+            margin-left: 20%;
+            display: inline-block;
+            position: absolute;
+            border: 2px solid rgb(0, 0, 0);
+        }
+        .sideb {
+            margin:0;
+            padding:0;
+            cursor: pointer;
+            display: ruby-text-container;
+        }
+        .side button {
+            font-size:20px;
+            width: 100%;
+            height: 15%;
+        }
+        .oldpass {
+            display: block;
+            margin-top: 20px;
+            position: absolute;
+        }
+        .newpass {
+            display: block;
+            position: absolute;
+            margin-top: 40px;
+        }    
+        .confirmpass {
+            display: block;
+            margin-top: 60px;
+            position: absolute;
+        }
+        .submit {
+            display: block;
+            margin-top: 80px;
+            position: absolute;
+        }
+        .logout-submit {
+
+        }
+        .password {
+
+        }
+        .submit-del {
+
+        }
+        #main-header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #main-header nav ul li {
+            float: left;
+            margin-left: 20px;
+        }
+
+        #main-header nav ul li a {
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        #main-header nav ul li a:hover {
+            background: #f7f7f7;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+        }
 
 
     </style>
@@ -153,3 +303,38 @@
         </script>
     </body>
 </html> -->
+<script src="/statics/jss/settingforms.js"></script> 
+<script>
+    function changpass (name) {
+        var t = document.getElementById("as");
+        switch(name) {
+            case 'chgpas':
+                var button = document.getElementById(name);
+                button.style.backgroundColor = "#ffffff";
+                t.setAttribute("action","/acount/changepass/")
+                if(t.innerHTML.length == 134){
+                    t.innerHTML += changepass;
+                }else{
+                    t.remove()
+                    var y = document.getElementById("form-form");
+                    y.innerHTML = '<form class="sideb" id="as" action="/acount/changepass/" method="post">{% csrf_token %}</form>';
+                    var form = document.getElementById("as");
+                    form.innerHTML += changepass;
+                }
+                break;
+            case 'delacount':
+                t.setAttribute("action","/acount/delacount/")
+                if(t.innerHTML.length == 134){
+                    t.innerHTML += delacount;
+                }else{
+                    t.remove()
+                    var y = document.getElementById("form-form");
+                    y.innerHTML = '<form class="sideb" id="as" action="/acount/delacount/" method="post">{% csrf_token %}</form>';
+                    var form = document.getElementById("as");
+                    form.innerHTML += delacount;
+                }
+                break;              
+        }
+    }
+
+</script>
