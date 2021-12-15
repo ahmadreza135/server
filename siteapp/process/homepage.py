@@ -10,7 +10,7 @@ def page(request):
         post = request.session["_old_post"]
     except KeyError:
         post = {}
-    context = {"arz_name":g.name,"arz_price":str(g.price),
+    context = {"arz":g,"arz_name":g.name,"arz_price":str(g.price),
             "arz_cap":str(g.market_cap),
                             "arz_time_open":g.timeopened,
                             "arz_time_close":g.timeclosing}

@@ -78,10 +78,11 @@
         }
     </style>
     <body>
-        <h1 class="name">Softcoin</h1>
         <center>
+            <h1 class="name"><a href="/">Softcoin</a></h1>
             <h3 class="chemdanom">Sign Up With </h3>
             <h2>{{ email }}</h2>
+            <h3 style="color:red;">{{ error }}</h3>
             <div class="form">
                 <form action="/acount/sign_up/verif_mail/" method="post">{% csrf_token %}
                     <input class="verify" type="text" name="verification_code" placeholder="Email Verify Code">

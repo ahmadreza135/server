@@ -70,8 +70,9 @@
         <center>
             <a href="/" class="name">Softcoin</a>
             <h2>Verify Email</h2>
+            <h3 style="color:red;">{{ error }}</h3>
             <div class="form">
-                <form action="/acount/sign_up/send_code/" method="post">{% csrf_token %}
+                <form action="/acount/send_code/" method="post">{% csrf_token %}
                     <input type="email" name="email" class="email" placeholder="type your email">
                     <input type="hidden" name="first_req" value="true">
                     <input type="submit" value="Send Code" class="submit">

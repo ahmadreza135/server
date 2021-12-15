@@ -51,6 +51,8 @@ class verify_email:
             return True
         except smtplib.SMTPRecipientsRefused:
             return False 
+        except smtplib.SMTPServerDisconnected:
+            return False
         global verif_codes
         global verification_code
 
@@ -63,38 +65,37 @@ class verify_email:
                 u = dashboard.objects.get(username=req_email)
                 if u is not None:
                     # u.delete()
-                    data = {"email_exixt":"true"}
+                    data = {"error":"error : user_exist"}
                 else:
-                    data = {"isnone":"yes"}    
+                    data = {"error":"error : isnone"}    
             except dashboard.DoesNotExist: 
                 # TODO : send verification email to email
                 verification_code[req_email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
                 if verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email])):
                     print(verification_code[req_email])
-                    return render(request,"login_signup/verify_second.html",{"email":req_email})
+                    return render(request,"sign_up/verify_second.html",{"email":req_email})
                 else:
-                    data = {"email_exist":"false"}    
+                    data = {"error":"error : email is worng"}    
         else:
-            data = {"wrong_req":"true"}        
+            data = {"error":"error : wrong_request.reload page and try again"}   
+        return render(request,"sign_up/verify_first_view.html",data) 
     def second(request):
-        print(request.POST)
+        data = {}
         if "verification_code" in request.POST:
             requ_email = request.POST.get("email")
-            print(verification_code)
             try:
                 if str(verification_code[requ_email]) == request.POST.get("verification_code"):
                     verification_code.pop(requ_email)
-                    
 
                     vers = emailv.objects.get(email=requ_email)
                     # emailv.objects.delete(email=requ_email)
                     if vers is not None:
-                        return JsonResponse({"respons":"false"})# TODO : save this response to database
+                        data = {"error":"error : user_exist"}# TODO : save this response to database
 
                 else:
-                    return JsonResponse({"res":"wrong code"})
+                    data = {"error":"error : wrong_verify_code"}
             except KeyError:
-                return JsonResponse({"verify_email_sent":"False"})
+                data = {"error":"error : verify_code_not_get"}
                 
             except emailv.DoesNotExist:
                 Email = request.POST['email']
@@ -108,9 +109,14 @@ class verify_email:
                     u.last_name = "false"
                     u.save()
                     request.session['_old_post'] = request.POST
-                    return redirect("/dashboard")
+                    request.session["_old_post"]["username"] = requ_email
+                    request.session["_old_post"]["password"] = NewPassword
+                    return redirect("/acount/dashboard/")
                 else:
-                    return JsonResponse({"not_comp":"true"})
+                    data = {"error":"error : confirm-password_is_not_password"}
+        else:
+            data = {"error":"error : wrong_request"}
+        return render(request,"sign_up/verify_second.html",data)         
     def forget_password(request):
         if request.method == "POST":
             r = request.POST
@@ -140,5 +146,5 @@ class verify_email:
             except dashboard.DoesNotExist:
                 d = {"user_exist":"false"}
             return d
-        elif request.method == "GET":
+        else:
             return render(request,"sign_up/forget.html",{})

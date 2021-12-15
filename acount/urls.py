@@ -17,5 +17,6 @@ urlpatterns = [
     path("sign_up/",TemplateView.as_view(template_name="sign_up/verify_first_view.html"),name="signup_view"),
     path("sign_up/verif_mail/",verify_email.second,name="sign_up/second_verify"),
     path("sign_up/sign/",signUp,name="sign"),
-    path("forgetpass/",verify_email.forget_password,name="forgetpass")
+    path("forgetpass/",verify_email.forget_password,name="forgetpass"),
+    path("logout/",setting.logout_user,name="logout")
 ]

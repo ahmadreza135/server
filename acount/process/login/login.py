@@ -8,33 +8,29 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 
 import django
-import json
+
 
 @csrf_protect
 def login_user(request):
     Password = request.POST.get('password')
     Username = request.POST.get("username")
     data = {}
-    try:
-        user = authenticate(request,username=Username, password=Password)
-        
-        if user is not None:
-            user.last_name = "true"
-            user.save()
-            data = {"login_user":"true"}
-            # TODO : set context
-            # print(request.user)
-            login_user_in(request,user)
-            # logout(request)
-            # print(request.user.is_authenticated)
-            request.session['_old_post'] = request.POST
-            return redirect("/acount/dashboard/")
-            # return render(request,"dashboard.html",data)
+    user = authenticate(request,username=Username, password=Password)
     
-            
-        else:
-            return render(request,"login/login_faild.html",context={})
-    except django.contrib.auth.models.User.DoesNotExist: 
-        data = {"user_exists": "false"}
-        return JsonResponse(data)
+    if user is not None:
+        user.last_name = "true"
+        user.save()
+        data = {"login_user":"true"}
+        # TODO : set context
+        # print(request.user)
+        login_user_in(request,user)
+        # logout(request)
+        # print(request.user.is_authenticated)
+        request.session['_old_post'] = request.POST
+        return redirect("/acount/dashboard/")
+        # return render(request,"dashboard.html",data)
+
+        
+    else:
+        return render(request,"login/login.html",context={"error":"username-or-password-is-wrong"})
     

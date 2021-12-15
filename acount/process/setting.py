@@ -42,4 +42,4 @@ def logout_user(request):
     request.session["_old_post"].pop("username")
     request.session["_old_post"].pop("password")
     logout(request)
-    return redirect("/login/")
+    return redirect("/acount/login/")

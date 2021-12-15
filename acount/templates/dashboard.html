@@ -9,16 +9,30 @@
     <title>Dashboard Template · Bootstrap v5.1</title>
 
     
-    <!-- Bootstrap core CSS -->
-    <link href="/statics/csss/bootstrap.min.css" rel="stylesheet">
+    <link href="/statics/csss/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/statics/csss/bootstrap/bootstrap.css" rel="stylesheet">
 
-    <!-- Favicons -->
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
 
 <meta name="theme-color" content="#7952b3">
   <link href="/statics/csss/dashboard.css" rel="stylesheet">
-
-    
-    <!-- Custom styles for this template -->
   </head>
   <body>
     
@@ -27,10 +41,10 @@
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="form-control" style="background-color:#212529;"></div>
+  <p class="form-control form-control-dark w-100" style="/*! padding: 0; */margin: 0;/*! height: 100%; */font-size: 16px;">{{ user.username }}</p>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
+      <a class="nav-link px-3" href="/acount/logout/">Sign out</a>
     </div>
   </div>
 </header>
@@ -48,7 +62,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link active" style="font-size:15px;" aria-current="page" href="/acount/settings/">
-              <span data-feather="home"></span>
+              <span data-feather="settings"></span>
               Settings
             </a>
           </li>
@@ -90,11 +104,78 @@
                 <p class="user_data-text">{{ user.ranking }}</p>
             </div>
             <h2 class="cap-1">ranking</h2>
-          </div>  
+          </div>
+          <div class="container" style="position: fixed;bottom:0;">
+            <footer class="py-3 my-4">
+              <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+              <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+              <li class="nav-item"><a href="/information/privacypolicy/" class="nav-link px-2 text-muted">Privacy</a></li>
+              <li class="nav-item"><a href="/information/aboutus/" class="nav-link px-2 text-muted">About</a></li>
+              </ul>
+              <p class="text-center text-muted">© 2021 ahmad</p>
+            </footer>
+          </div>
         </main>
       </div>
     </div>
+      <script src="https://getbootstrap.com/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script>
+        /* globals Chart:false, feather:false */
+
+      (function () {
+        'use strict'
+
+        feather.replace({ 'aria-hidden': 'true' })
+
+        // Graphs
+        var ctx = document.getElementById('myChart')
+        // eslint-disable-next-line no-unused-vars
+        var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: [
+              'Sunday',
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday'
+            ],
+            datasets: [{
+              data: [
+                15339,
+                21345,
+                18483,
+                24003,
+                23489,
+                24092,
+                12034
+              ],
+              lineTension: 0,
+              backgroundColor: 'transparent',
+              borderColor: '#007bff',
+              borderWidth: 4,
+              pointBackgroundColor: '#007bff'
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: false
+                }
+              }]
+            },
+            legend: {
+              display: false
+            }
+          }
+        })
+      })()
+
+      </script>
   </body>
 </html>
-
 
