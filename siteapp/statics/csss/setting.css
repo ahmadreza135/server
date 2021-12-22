@@ -125,7 +125,7 @@ height: auto;
 }
 .form-form {
 background-color:black;
-height: 90px;
+height: auto;
 border: 1px solid rgb(0, 0, 0);
 }
 .from {
@@ -144,7 +144,6 @@ height: 15%;
 }
 
 .form-input {
-width:33%;
 margin-top: 10px;
 background-color:honeydew;
 }    

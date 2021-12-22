@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.contrib.auth import authenticate, logout
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from django.shortcuts import redirect
 
 @csrf_protect
 def view(request):
+    print(request.session["_old_post"])
     try:
         post = request.session['_old_post']
         username = post["username"]
@@ -19,7 +21,7 @@ def view(request):
         if u is not None:
             try:
                 sucse = request.session["sucse"]
-                request.session.pop("sucse")
+                # request.session.pop("sucse")
                 return render(request,"setting.html",{"sucse":sucse})
             except KeyError:
                  return render(request,"setting.html",{})
@@ -29,17 +31,28 @@ def view(request):
         return redirect("/acount/login/")
 @csrf_protect
 def changepass(request):
+    data = request.POST
     post = request.session['_old_post']
     email = post["username"]
-    password = request.POST["newpass"]
-    us = dashboard.objects.get(username=email)
-    us.set_password(password)
-    us.save()
-    request.session["sucse"] = "true"
-    return redirect("/acount/settings/")
+    oldpass = data["oldpass"]
+    newpass = data["newpass"]
+    confirmpass = data["confirmpass"]
+    u = authenticate(request,username=email,password=oldpass)
+    if u is not None:
+        if newpass == confirmpass:
+            u.set_password(newpass)
+            u.save()
+            # request.session["sucse"] = "true"
+            post["password"] = newpass
+            # print(post)
+            request.session["_old_post"].pop("password")
+            request.session["_old_post"]["password"] = newpass
+            print(request.session["_old_post"])
+            return redirect("/acount/settings/")
+
 
 def logout_user(request):
     request.session["_old_post"].pop("username")
     request.session["_old_post"].pop("password")
     logout(request)
-    return redirect("/acount/login/")
+    return redirect("/")

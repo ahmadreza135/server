@@ -3,6 +3,7 @@
 	<head>
 		<link href="/statics/csss/bootstrap.min.css" rel="stylesheet">
 		<link href="/statics/csss/bootstrap.css" rel="stylesheet">
+		<link href="/statics/csss/homepage.css" rel="stylesheet">
 
 
 		<title>Ahmad Homepage</title>
@@ -11,25 +12,28 @@
 		<meta charset="UTF-8" />
 		<meta name="description" content="Lorem ipsum aliquip minim mollit sit velit proident elit duis aute irure tempor magna sint pariatur reprehenderit aliquip et voluptate consequat cillum tempor in culpa irure dolore ea aute laboris in elit tempor sed." />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-		<link href="/statics/csss/homepage.css" rel="stylesheet">
 
 	</head>
 	<body>
 		<div class="container">
-			<header class="d-flex flex-w/statics/images/icon.pngrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-			  <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-				<img src="/statics/images/icon.png" alt="Softcoin" style="max-width:120px;max-height:60px;">
-			  </a>
-		
-			  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-				<li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-			  </ul>
-		
-			  <div id="ul" class="col-md-3 text-end">
-				<a href="/acount/login/" class="login-a btn btn-outline-primary me-2">Login</a>
-				<a href="/acount/sign_up/" class="btn btn-primary">Sign-up</a>
-			  </div>
-			</header>
+			<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+				<a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+				  <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+				</a>
+		  
+				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+				  <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+				  <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
+				  <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
+				  <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+				  <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+				</ul>
+		  
+				<div id="ul" class="col-md-3 text-end">
+				  <a href="/acount/login/" type="button" class="btn btn-outline-primary me-2">Login</a>
+				  <a href="/acount/sign_up/" type="button" class="btn btn-primary">Sign-up</a>
+				</div>
+			  </header>
 		</div>
         <center>
 			<div class="container">
@@ -48,8 +52,11 @@
 					</div>
 					<div class="arz-status col-12 col-sm-12">
 						<label>Status: </label>
-						<h2 class="p">{{ arz.status }}</h2>
-						<p style="color:white;font-size:20px;font-weight:400;margin-top: 10px;">our suggestion to you: buy</p>
+						<p class="p status">status</p>
+					</div>
+					<div class="arz-sugestion">
+						<label style="color:white;font-size:20px;font-weight:400;margin-top: 10px;">our suggestion to you: </lbael>
+						<p class="sugestion">buy</p>
 					</div>
 					</div>
 					<br>
@@ -85,7 +92,7 @@
 			  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
 				<li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
 				<li class="nav-item"><a href="/information/privacypolicy/" class="nav-link px-2 text-muted">Privacy</a></li>
-				<li class="nav-item"><a href="/information/aboutus/" class="nav-link px-2 text-muted">About</a></li>
+				<li class="nav-item"><a href="/information/aboutus/" class="nav-link px-2 text-muted">About us and contact us</a></li>
 			  </ul>
 			  <p class="text-center text-muted">© 2021 ahmad</p>
 			</footer>

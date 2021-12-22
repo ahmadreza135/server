@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from serapp.models import public_arz
 from django.views.decorators.csrf import csrf_protect
-# @csrf_protect?
+from django.views.decorators.csrf import requires_csrf_token
+
+@requires_csrf_token
+@csrf_protect
 def page(request):
     template_name = "../templates/homepage.html"
     g = public_arz.objects.all()

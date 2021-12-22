@@ -4,80 +4,30 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Softcoin Email Verify</title>
+        <link href="/statics/csss/bootstrap.css" rel="stylesheet">
+        <link href="/statics/csss/verify_first_view.css" rel="stylesheet">
     </head>
 
-
-    <style>
-        body, html {
-            padding: 0;
-            margin: 0;
-        }
-
-        html {
-            background: #a5e1f6;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-            padding-top: 2%;
-        }
-
-        .clearfix:after {
-          visibility: hidden;
-          display: block;
-          font-size: 0;
-          content: " ";
-          clear: both;
-          height: 0;
-        }
-        .form{
-            width: 460px;
-            height: 200px;
-            background-color: #6D7BF4;
-            margin-top: 2%;
-            border-radius: 30px;
-        }
-        .email {
-            margin-top: 15%;
-            width: 70%;
-            height: 30px;
-            font-size: 18px;
-        }
-        .submit {
-            display: block;
-            margin-top: 30px;
-            width: 40%;
-            height: 40px;
-            border-radius: 25px;
-            background-color: #2BEE00;
-            color: #FFFFFF;
-            font-size: 16px;
-        }
-        center h2 {
-            margin: 0;
-            padding: 0;
-            margin-top: 180px;
-            font-size: 25px;
-        }
-        .name{
-            font-size: 40px;
-            display: inline;
-            text-decoration: none;
-            color: #000000;
-        }
-    </style>
-
-    <body>
+<body class="text-center">
+    
+    <main class="form-signin">
+      <form class="row" action="/acount/login/login/" method="post">{% csrf_token %}
+        <a href="/">
+            <img class="mb-4" src="/statics/images/icon.png" alt="" width="72" height="57">
+        </a>
+        <h1 class="h3 mb-3 fw-normal">Enter your email</h1>
+        <h2 style="font-size:20px;color:red;">{{ error }}</h2>
+        <div class="form-floating">
+          <input name="username" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput" style="margin-left: 5px;">Email address</label>
+        </div>
+    
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Get code</button>
+        <p class="col-sm-12">Do you have an acount?  <a class="link" href="/acount/login/">Login</a></p>
+      </form>
+    </main>
+    
+    
         
-        <center>
-            <a href="/" class="name">Softcoin</a>
-            <h2>Verify Email</h2>
-            <h3 style="color:red;">{{ error }}</h3>
-            <div class="form">
-                <form action="/acount/send_code/" method="post">{% csrf_token %}
-                    <input type="email" name="email" class="email" placeholder="type your email">
-                    <input type="hidden" name="first_req" value="true">
-                    <input type="submit" value="Send Code" class="submit">
-                </form>
-            </div>
-        </center>
-    </body>
+      </body>
 </html>

@@ -14,7 +14,7 @@ def dashboard(request):
         try:
             post = request.session['_old_post']
         except KeyError:
-             return redirect('/acount/login/')
+            return redirect('/acount/login/')
         
         if "username" in post and "password" in post:
             username = post["username"]
@@ -35,5 +35,5 @@ def dashboard(request):
         else:
             data = {"wrong_req":"true"}          
     else:
-        return redirect('/login/')
+        return redirect('/acount/login/')
     return JsonResponse(data)

@@ -44,7 +44,7 @@
     border: 1px solid black;
     background-color:blue;
     box-shadow: 1px 1px black;
-    border-radius: 200px;
+    border-radius: 100px;
 }
 .arz-form-2 {
 margin-top: 30px;
@@ -226,4 +226,15 @@ font-size: 85%;
 
 .dropdown-toggle {
 outline: 0;
+}
+
+label {
+    font-size: 20px;
+}
+
+.status {
+    display: inline-block;
+}
+.sugestion {
+    font-size: 30
 }

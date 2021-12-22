@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+
 from django.urls import path,include
 
 urlpatterns = [
@@ -21,3 +22,5 @@ urlpatterns = [
     path('json/', include('serapp.urls')),
     path('', include('siteapp.urls'))
 ]
+
+handler404 = 'siteapp.errorpages.handler_404'

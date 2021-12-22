@@ -23,26 +23,25 @@
   <body class="text-center">
     
 <main class="form-signin">
-  {{ error }}
-  <form action="/acount/login/login/" method="post">{% csrf_token %}
+  <form class="row" action="/acount/login/login/" method="post">{% csrf_token %}
     <a href="/">
         <img class="mb-4" src="/statics/images/icon.png" alt="" width="72" height="57">
     </a>
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+    <h2 style="font-size:20px;color:red;">{{ error }}</h2>
     <div class="form-floating">
       <input name="username" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+      <label for="floatingInput" style="margin-left: 5px;">Email address</label>
     </div>
     <div class="form-floating">
       <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+      <label for="floatingPassword" style="margin-left: 5px;">Password</label>
     </div>
 
     <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    <a class="col-sm-12 link" style="margin-top:10px;margin-bottom:5px;" href="/acount/forgetpass/">Forget Password</a>
+    <p class="col-sm-12">Don't have an acount?  <a class="link" href="/acount/sign_up/">Sign Up</a></p>
   </form>
-  <a href="/acount/forgetpass/">forget</a>
 </main>
 
 

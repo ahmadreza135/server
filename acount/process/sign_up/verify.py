@@ -59,7 +59,7 @@ class verify_email:
     def first(request):
         data = {}
         # print(request.user)
-        if "first_req" in request.POST and "email" in request.POST:
+        if "email" in request.POST:
             req_email = request.POST.get("email")
             try:
                 u = dashboard.objects.get(username=req_email)
@@ -77,8 +77,9 @@ class verify_email:
                 else:
                     data = {"error":"error : email is worng"}    
         else:
-            data = {"error":"error : wrong_request.reload page and try again"}   
-        return render(request,"sign_up/verify_first_view.html",data) 
+            data = {"error":"error : wrong_request__reload page and try again"}   
+        request.session["error_data"] = data
+        return redirect("/acount/sign_up/")
     def second(request):
         data = {}
         if "verification_code" in request.POST:

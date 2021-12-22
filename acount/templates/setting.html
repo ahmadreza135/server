@@ -31,7 +31,7 @@
   <p class="form-control form-control-dark w-100" style="/*! padding: 0; */margin: 0;/*! height: 100%; */font-size: 16px;">{{ user.username }}</p>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
+      <a class="nav-link px-3" href="/acount/logout/">Sign out</a>
     </div>
   </div>
 </header>
@@ -62,19 +62,13 @@
             <h1 class="h2">Settings {{ sucse }}</h1>
         </div>
         <div class="container">
-            <div class="row">
-                <div name="chgpas" class="col-12 col-sm-12">
-                    <div class="row">
-                        <h3 class="col-12 col-sm-4">Change Password</h3>
-                        <form class="col-12 col-sm-8 form-form" id="as" action="/acount/changepass/" method="post">{% csrf_token %}
-                            <input class='form-input' type='password' name='oldpass' placeholder='Password'>
-                            <input class='form-input' type='password' name='newpass' placeholder='New Password'>
-                            <input class='form-input' type='password' name='confirmpass' placeholder='Confirm Password'>
-                            <input class='submit' type='submit' value='Change Password'>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <h3 class="col-12 col-sm-12">Change Password</h3>
+            <form class="row form-form" id="as" action="/acount/changepass/" method="post">{% csrf_token %}
+                <input class='col-12 col-sm-12 form-input' type='password' name='oldpass' placeholder='Password'>
+                <input class='col-12 col-sm-12 form-input' type='password' name='newpass' placeholder='New Password'>
+                <input class='col-12 col-sm-12 form-input' type='password' name='confirmpass' placeholder='Confirm Password'>
+                <input class='col-12 col-sm-12 submit' type='submit' value='Change Password'>
+            </form>
         </div>  
       </div> 
     </main>
