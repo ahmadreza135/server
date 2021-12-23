@@ -58,66 +58,73 @@ class verify_email:
 
     def first(request):
         data = {}
-        # print(request.user)
-        if "email" in request.POST:
-            req_email = request.POST.get("email")
-            try:
-                u = dashboard.objects.get(username=req_email)
-                if u is not None:
-                    # u.delete()
-                    data = {"error":"error : user_exist"}
-                else:
-                    data = {"error":"error : isnone"}    
-            except dashboard.DoesNotExist: 
-                # TODO : send verification email to email
-                verification_code[req_email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
-                if verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email])):
-                    print(verification_code[req_email])
-                    return render(request,"sign_up/verify_second.html",{"email":req_email})
-                else:
-                    data = {"error":"error : email is worng"}    
+        if request.method == "POST":
+            # print(request.user)
+            if "email" in request.POST:
+                req_email = request.POST.get("email")
+                try:
+                    u = dashboard.objects.get(username=req_email)
+                    if u is not None:
+                        # u.delete()
+                        data = {"error":"user exist"}
+                    else:
+                        data = {"error":"isnone"}    
+                except dashboard.DoesNotExist: 
+                    # TODO : send verification email to email
+                    verification_code[req_email] = random.randint(random.randint(100000,150000),random.randint(900000,990000))
+                    if verify_email.send_email(request.POST.get("email"),"This Is Your Verification Code For My Application\n"+str(verification_code[req_email])):
+                        print(verification_code[req_email])
+                        return render(request,"sign_up/verify_second.html",{"email":req_email})
+                    else:
+                        data = {"error":"email is worng"}    
+            else:
+                data = {"error":"wrong_request reload page and try again"}
+            request.session["error_data"] = data    
         else:
-            data = {"error":"error : wrong_request__reload page and try again"}   
-        request.session["error_data"] = data
+            context = request.session["error_data"]
+            request.session.pop("error_data")
+            return render(request,"sign_up/verify_second.html",context = context)
         return redirect("/acount/sign_up/")
     def second(request):
         data = {}
-        if "verification_code" in request.POST:
-            requ_email = request.POST.get("email")
-            try:
-                if str(verification_code[requ_email]) == request.POST.get("verification_code"):
-                    verification_code.pop(requ_email)
+        if request.method == "POST":
+            if "verification_code" in request.POST:
+                requ_email = request.POST.get("email")
+                try:
+                    if str(verification_code[requ_email]) == request.POST.get("verification_code"):
+                        verification_code.pop(requ_email)
 
-                    vers = emailv.objects.get(email=requ_email)
-                    # emailv.objects.delete(email=requ_email)
-                    if vers is not None:
-                        data = {"error":"error : user_exist"}# TODO : save this response to database
+                        vers = emailv.objects.get(email=requ_email)
+                        # emailv.objects.delete(email=requ_email)
+                        if vers is not None:
+                            data = {"error":"user_exist"}# TODO : save this response to database
 
-                else:
-                    data = {"error":"error : wrong_verify_code"}
-            except KeyError:
-                data = {"error":"error : verify_code_not_get"}
-                
-            except emailv.DoesNotExist:
-                Email = request.POST['email']
-                NewPassword = request.POST['newpassword']
-                cpass = request.POST["confirmpass"]
-                if cpass == NewPassword:
-                    em = emailv(email=requ_email)
-                    em.save()
-                    u = dashboard.objects.create_user(username=requ_email)
-                    u.set_password(NewPassword)
-                    u.last_name = "false"
-                    u.save()
-                    request.session['_old_post'] = request.POST
-                    request.session["_old_post"]["username"] = requ_email
-                    request.session["_old_post"]["password"] = NewPassword
-                    return redirect("/acount/dashboard/")
-                else:
-                    data = {"error":"error : confirm-password_is_not_password"}
-        else:
-            data = {"error":"error : wrong_request"}
-        return render(request,"sign_up/verify_second.html",data)         
+                    else:
+                        data = {"error":"wrong_verify_code"}
+                except KeyError:
+                    data = {"error":"verify_code_not_get"}
+                    
+                except emailv.DoesNotExist:
+                    Email = request.POST['email']
+                    NewPassword = request.POST['newpassword']
+                    cpass = request.POST["confirmpass"]
+                    if cpass == NewPassword:
+                        em = emailv(email=requ_email)
+                        em.save()
+                        u = dashboard.objects.create_user(username=requ_email)
+                        u.set_password(NewPassword)
+                        u.last_name = "false"
+                        u.save()
+                        request.session['_old_post'] = request.POST
+                        request.session["_old_post"]["username"] = requ_email
+                        request.session["_old_post"]["password"] = NewPassword
+                        return redirect("/acount/dashboard/")
+                    else:
+                        data = {"error":"confirm password is not password"}
+            else:
+                data = {"error":"wrong request"}
+        request.session["error_data"] = data   
+        return redirect("/acount/send_code/") 
     def forget_password(request):
         if request.method == "POST":
             r = request.POST

@@ -82,20 +82,32 @@
             <h1 class="name"><a href="/">Softcoin</a></h1>
             <h3 class="chemdanom">Sign Up With </h3>
             <h2>{{ email }}</h2>
-            <h3 style="color:red;">{{ error }}</h3>
+            <h3 id="error" style="color:red;">{{ error }}</h3>
             <div class="form">
-                <form action="/acount/sign_up/verif_mail/" method="post">{% csrf_token %}
+                <form id="form" action="/acount/sign_up/verif_mail/" method="post">{% csrf_token %}
                     <input class="verify" type="text" name="verification_code" placeholder="Email Verify Code">
                     
-                    <input class="password" name="newpassword" type="password" placeholder="Password">
+                    <input id="pass" class="password" name="newpassword" type="password" placeholder="Password">
 
                     <input type="hidden" name="email" value="{{ email }}">
                     
-                    <input class="confirm" type="password" name="confirmpass" placeholder="Confirm Password">
+                    <input id="confirm" class="confirm" type="password" name="confirmpass" placeholder="Confirm Password">
                     
-                    <input class="submit" type="submit" value="SignUp">
+                    <input class="button" onclick="faormsubmit()" type="button" value="SignUp">
                 </form>
             </div>
-        </center>  
+        </center>
+        <script>
+            function faormsubmit() {
+                var pass = document.getElementById("pass");
+                var confirm = document.getElementById("confirm");
+                if (pass.value == confirm.value){
+                    document.getElementById("form").submit();
+                }else{
+                    var err = document.getElementById("error");
+                    err.innerHTML="password and confirm is not equal"
+                }
+            }
+        </script>
     </body>
 </html>

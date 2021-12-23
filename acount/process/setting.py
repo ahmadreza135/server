@@ -24,7 +24,7 @@ def view(request):
                 # request.session.pop("sucse")
                 return render(request,"setting.html",{"sucse":sucse})
             except KeyError:
-                 return render(request,"setting.html",{})
+                 return render(request,"setting.html",{"username":username})
         else:
             pass
     except KeyError:
@@ -42,13 +42,9 @@ def changepass(request):
         if newpass == confirmpass:
             u.set_password(newpass)
             u.save()
-            # request.session["sucse"] = "true"
-            post["password"] = newpass
-            # print(post)
-            request.session["_old_post"].pop("password")
-            request.session["_old_post"]["password"] = newpass
-            print(request.session["_old_post"])
-            return redirect("/acount/settings/")
+            request.session["sucs"] = {}
+            request.session["sucs"]["success"] = "password has been successfully changed"
+            return redirect("/acount/login/")
 
 
 def logout_user(request):

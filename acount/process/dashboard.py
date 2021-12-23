@@ -21,7 +21,7 @@ def dashboard(request):
             password = post["password"]
             user = authenticate(request,username=username,password=password)
             if user is not None:
-                data = {"user":user}
+                data = {"username":username,"sarafi":user.sarafi,"verified_trades":user.verified_trades,"invited_peaple":user.invited_peaple,"sum_of_trades":user.sum_of_trades,"ranking":user.ranking}
                 return render(request,"dashboard.html",data)
             else:
                 data = {"user_exist":"true"}
@@ -30,7 +30,7 @@ def dashboard(request):
             password = post["newpassword"]
             user = authenticate(request,username=username,password=password)
             if user is not None:
-                data = {"user":user}
+                data = {"username":username,"sarafi":user.sarafi,"verified_trades":user.verified_trades,"invited_peaple":user.invited_peaple,"sum_of_trades":user.sum_of_trades,"ranking":user.ranking}
                 return render(request,"dashboard.html",data)
         else:
             data = {"wrong_req":"true"}          

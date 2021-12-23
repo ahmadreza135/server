@@ -32,5 +32,7 @@ def login_user(request):
 
         
     else:
-        return render(request,"login/login.html",context={"error":"username-or-password-is-wrong"})
+        context={"error":"username or password is wrong"}
+        request.session["error_data"] = context
+        return redirect("/acount/login/")
     
