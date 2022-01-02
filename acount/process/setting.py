@@ -1,5 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate, logout
+from django.http.response import JsonResponse
+from django.views.decorators import csrf
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render
 from siteapp.models import dashboard
@@ -52,3 +54,24 @@ def logout_user(request):
     request.session["_old_post"].pop("password")
     logout(request)
     return redirect("/")
+
+@csrf_protect
+def changeexchangesite(request):
+    try:
+        post = request.session['_old_post']
+        username = post["username"]
+        password = post["password"]
+        u = authenticate(request,username=username,password=password)
+        if u is not None:
+            try:
+                print(request.POST)
+                u.sarafi = request.POST["exchange_site"]
+                u.save()
+                ret = {'sucsess':"fully"}
+            except KeyError:
+                 return render(request,"setting.html",{"username":username})
+        else:
+            ret = {"sucsess":"false"}
+    except KeyError:
+        return redirect("/acount/login/")
+    return JsonResponse(ret)    

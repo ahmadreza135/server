@@ -27,7 +27,11 @@ def login_user(request):
         # logout(request)
         # print(request.user.is_authenticated)
         request.session['_old_post'] = request.POST
-        return redirect("/acount/dashboard/")
+        try:
+            returnurl = request.POST["return"]
+            return redirect(returnurl)
+        except KeyError:    
+            return redirect("/acount/dashboard/")
         # return render(request,"dashboard.html",data)
 
         

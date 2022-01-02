@@ -6,6 +6,7 @@ from .process.sign_up.verify import verify_email
 from django.views.generic import TemplateView
 from .process.dashboard import dashboard
 from .views import login_view,sign_up_view
+from .process.cypto import buy,sell
 
 
 urlpatterns = [
@@ -20,5 +21,7 @@ urlpatterns = [
     path("sign_up/verif_mail/",verify_email.second,name="sign_up/second_verify"),
     path("sign_up/signup/",signUp,name="sign"),
     path("forgetpass/",verify_email.forget_password,name="forgetpass"),
-    path("logout/",setting.logout_user,name="logout")
+    path("logout/",setting.logout_user,name="logout"),
+    path("exchange/",setting.changeexchangesite,name="sdf"),
+    path("buycypto/",buy,name="buycypto")
 ]
